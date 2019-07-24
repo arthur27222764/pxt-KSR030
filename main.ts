@@ -390,6 +390,65 @@ namespace KSR030 {
         }
     }
 
+    //% blockId=PWM_DETECT_Frequency
+    //% block="DETECT Servo %channel Frequency to pin %iopin"
+    //% weight=86
+    export function DETECT_Frequency(channel: ServoNum, iopin: DigitalPin): void  {
+        let frq = 0;
+        let frqPinState = 0;
+        let prevFrqPinState = 0;
+        let oneSecond = 1000;
+        let timer = 0;
+       
+        if(!initialized){
+			init()
+        }
+        setPwm(channel, 0, SERVOMAX);
+        for(let i=0; i<4 ; i++) {
+            frqPinState = pins.digitalReadPin(iopin)
+            if (frqPinState == 0) {
+                prevFrqPinState = 0
+            }
+            if (frqPinState == 1 && prevFrqPinState == 0) {
+                prevFrqPinState = frqPinState
+                frq = frq + 1
+            }
+            control.waitMicros(1000)
+            timer = timer + 1
+            if (timer > oneSecond) {
+                frq = frq-2
+                if (frq > 53) {
+                    basic.showString("A")
+                } else {
+                    if (frq > 52) {
+                        basic.showString("B")
+                    } else {
+                        if (frq > 51) {
+                            basic.showString("C")
+                        } else {
+                            if (frq > 50) {
+                                basic.showString("D")
+                            } else {
+                                if (frq > 49) {
+                                    basic.showString("E")
+                                } else {
+                                    if (frq <= 49) {
+                                        basic.showString("F")
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                frq = 0
+                timer = 0
+            }
+        }
+        
+
+    }
+
     
     
  
