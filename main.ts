@@ -151,7 +151,7 @@ namespace KSR030 {
 
     //% blockId=KSR030_Frq_Set
     //% block="PWM Frequency Set %frqval"
-    //% weight=97
+    //% weight=99
     export function Frq_Set(frqval:FrqState):void{
        
         if(!initialized){
