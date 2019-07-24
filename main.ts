@@ -392,7 +392,7 @@ namespace KSR030 {
 
     //% blockId=PWM_DETECT_Frequency
     //% block="DETECT Servo %channel Frequency to pin %iopin"
-    //% weight=86
+    //% weight=80
     export function DETECT_Frequency(channel: ServoNum, iopin: DigitalPin): void  {
         let frq = 0;
         let frqPinState = 0;
@@ -404,7 +404,7 @@ namespace KSR030 {
 			init()
         }
         setPwm(channel, 0, SERVOMAX);
-        for(let i=0; i<4 ; i++) {
+        for(let i=0; i<4000 ; i++) {
             frqPinState = pins.digitalReadPin(iopin)
             if (frqPinState == 0) {
                 prevFrqPinState = 0
