@@ -444,6 +444,7 @@ namespace KSR030 {
                                         if(frq <= 48) {
                                             //basic.showString("X")
                                             return 88
+                                            
                                         }
                                     }
                                         
