@@ -399,6 +399,7 @@ namespace KSR030 {
         let prevFrqPinState = 0;
         let oneSecond = 1000;
         let timer = 0;
+        let ret_frq = 0;
        
         if(!initialized){
 			init()
@@ -419,31 +420,31 @@ namespace KSR030 {
                 frq = frq-2
                 if (frq > 53) {
                     //basic.showString("A")
-                    return 65
+                    ret_frq= 65
                 } else {
                     if (frq > 52) {
                         //basic.showString("B")
-                        return 66
+                        ret_frq= 66
                     } else {
                         if (frq > 51) {
                             //basic.showString("C")
-                            return 67
+                            ret_frq= 67
                         } else {
                             if (frq > 50) {
                                 //basic.showString("D")
-                                return 68
+                                ret_frq=  68
                             } else {
                                 if (frq > 49) {
                                     //basic.showString("E")
-                                    return 69
+                                    ret_frq=  69
                                 } else {
                                     if (frq > 48) {
                                         //basic.showString("F")
-                                        return 70
+                                        ret_frq=  70
                                     } else {
                                         if(frq <= 48) {
                                             //basic.showString("X")
-                                            return 88
+                                            ret_frq=  88
 
                                         }
                                     }
@@ -458,7 +459,7 @@ namespace KSR030 {
                 timer = 0
             }
         }
-        return 88
+        return ret_frq
         
 
     }
