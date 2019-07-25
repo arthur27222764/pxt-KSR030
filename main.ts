@@ -393,7 +393,7 @@ namespace KSR030 {
     //% blockId=PWM_DETECT_Frequency
     //% block="DETECT Servo %channel Frequency to pin %iopin"
     //% weight=80
-    export function DETECT_Frequency(channel: ServoNum, iopin: DigitalPin): void  {
+    export function DETECT_Frequency(channel: ServoNum, iopin: DigitalPin): number  {
         let frq = 0;
         let frqPinState = 0;
         let prevFrqPinState = 0;
@@ -418,23 +418,35 @@ namespace KSR030 {
             if (timer > oneSecond) {
                 frq = frq-2
                 if (frq > 53) {
-                    basic.showString("A")
+                    //basic.showString("A")
+                    return 65
                 } else {
                     if (frq > 52) {
-                        basic.showString("B")
+                        //basic.showString("B")
+                        return 66
                     } else {
                         if (frq > 51) {
-                            basic.showString("C")
+                            //basic.showString("C")
+                            return 67
                         } else {
                             if (frq > 50) {
-                                basic.showString("D")
+                                //basic.showString("D")
+                                return 68
                             } else {
                                 if (frq > 49) {
-                                    basic.showString("E")
+                                    //basic.showString("E")
+                                    return 69
                                 } else {
-                                    if (frq <= 49) {
-                                        basic.showString("F")
+                                    if (frq > 48) {
+                                        //basic.showString("F")
+                                        return 70
+                                    } else {
+                                        if(frq <= 48) {
+                                            //basic.showString("X")
+                                            return 88
+                                        }
                                     }
+                                        
                                 }
                             }
                         }
@@ -448,12 +460,6 @@ namespace KSR030 {
         
 
     }
-
-    
-    
- 
-	
-	
 
 
 }
