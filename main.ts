@@ -444,7 +444,7 @@ namespace KSR030 {
                                         if(frq <= 48) {
                                             //basic.showString("X")
                                             return 88
-                                            
+
                                         }
                                     }
                                         
@@ -458,6 +458,7 @@ namespace KSR030 {
                 timer = 0
             }
         }
+        return 88
         
 
     }
