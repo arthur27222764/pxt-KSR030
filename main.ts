@@ -100,37 +100,108 @@ namespace KSR030 {
     function init(): void {
         pins.setPull(DigitalPin.P8, PinPullMode.PullUp);
         pins.setPull(DigitalPin.P12, PinPullMode.PullUp);
-        i2c_write(MODE1, 0x00);
-        // Constrain the frequency
 
-        switch (DETECT_Frequency(ServoNum.S0, DigitalPin.P2)) {
-            case 65:
-                Frq_Set(FrqState.A)
-                break;
-            case 66:
-                Frq_Set(FrqState.B)
-                break;
-            case 67:
-                Frq_Set(FrqState.C)
-                break;
-            case 68:
-                Frq_Set(FrqState.D)
-                break;
-            case 69:
-                Frq_Set(FrqState.E)
-                break;
-            case 70:
-                Frq_Set(FrqState.F)
-                break;
-            default:
-                setFreq(50);
-                break;
-
-
-        }
-
+        detect_freq(ServoNum.S0 , DigitalPin.P2 , 1);
+     
         initialized = true;
     }
+
+    function detect_freq(channel: ServoNum, iopin: DigitalPin, flag: number): number {
+        let frq = 0;
+        let frqPinState = 0;
+        let prevFrqPinState = 0;
+        let oneSecond = 1000;
+        let timer = 0;
+        let ret_frq = 0;
+
+        setPwm(channel, 0, SERVOMAX);
+        for (let i = 0; i < 2000; i++) {
+            frqPinState = pins.digitalReadPin(iopin)
+            if (frqPinState == 0) {
+                prevFrqPinState = 0
+            }
+            if (frqPinState == 1 && prevFrqPinState == 0) {
+                prevFrqPinState = frqPinState
+                frq = frq + 1
+            }
+            control.waitMicros(1000)
+            timer = timer + 1
+            if (timer > oneSecond) {
+                frq = frq - 2
+                if (frq > 53) {
+                    //basic.showString("A")
+                    ret_frq = 65
+                    if (flag) {
+                        i2c_write(MODE1, 0x00);
+                        setFreq(50 * 0.92);
+                    }
+                } else {
+                    if (frq > 52) {
+                        //basic.showString("B")
+                        ret_frq = 66
+                        if (flag) {
+                            i2c_write(MODE1, 0x00);
+                            setFreq(50 * 0.94);
+                        }
+                    } else {
+                        if (frq > 51) {
+                            //basic.showString("C")
+                            ret_frq = 67
+                            if (flag) {
+                                i2c_write(MODE1, 0x00);
+                                setFreq(50 * 0.96);
+                            }
+                        } else {
+                            if (frq > 50) {
+                                //basic.showString("D")
+                                ret_frq = 68
+                                if (flag) {
+                                    i2c_write(MODE1, 0x00);
+                                    setFreq(50 * 0.98);
+                                }
+                            } else {
+                                if (frq > 49) {
+                                    //basic.showString("E")
+                                    ret_frq = 69
+                                    if (flag) {
+                                        i2c_write(MODE1, 0x00);
+                                        setFreq(50);
+                                    }
+                                } else {
+                                    if (frq > 48) {
+                                        //basic.showString("F")
+                                        ret_frq = 70
+                                        if (flag) {
+                                            i2c_write(MODE1, 0x00);
+                                            setFreq(50 * 1.02);
+                                        }
+                                    } else {
+                                        if (frq <= 48) {
+                                            //basic.showString("X")
+                                            ret_frq = 88
+                                            if (flag) {
+                                                i2c_write(MODE1, 0x00);
+                                                setFreq(50 * 1.04);
+                                            }
+
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+
+                frq = 0
+                timer = 0
+            }
+        }
+        return ret_frq
+
+
+    }
+
 
     function setFreq(freq: number): void {
         let prescaleval = 25000000 / 4096 / freq;
@@ -418,73 +489,8 @@ namespace KSR030 {
     //% block="DETECT Servo %channel Frequency to pin %iopin"
     //% weight=80
     export function DETECT_Frequency(channel: ServoNum, iopin: DigitalPin): number {
-        let frq = 0;
-        let frqPinState = 0;
-        let prevFrqPinState = 0;
-        let oneSecond = 1000;
-        let timer = 0;
-        let ret_frq = 0;
 
-        if (!initialized) {
-            init()
-        }
-        setPwm(channel, 0, SERVOMAX);
-        for (let i = 0; i < 2000; i++) {
-            frqPinState = pins.digitalReadPin(iopin)
-            if (frqPinState == 0) {
-                prevFrqPinState = 0
-            }
-            if (frqPinState == 1 && prevFrqPinState == 0) {
-                prevFrqPinState = frqPinState
-                frq = frq + 1
-            }
-            control.waitMicros(1000)
-            timer = timer + 1
-            if (timer > oneSecond) {
-                frq = frq - 2
-                if (frq > 53) {
-                    //basic.showString("A")
-                    ret_frq = 65
-                } else {
-                    if (frq > 52) {
-                        //basic.showString("B")
-                        ret_frq = 66
-                    } else {
-                        if (frq > 51) {
-                            //basic.showString("C")
-                            ret_frq = 67
-                        } else {
-                            if (frq > 50) {
-                                //basic.showString("D")
-                                ret_frq = 68
-                            } else {
-                                if (frq > 49) {
-                                    //basic.showString("E")
-                                    ret_frq = 69
-                                } else {
-                                    if (frq > 48) {
-                                        //basic.showString("F")
-                                        ret_frq = 70
-                                    } else {
-                                        if (frq <= 48) {
-                                            //basic.showString("X")
-                                            ret_frq = 88
-
-                                        }
-                                    }
-
-                                }
-                            }
-                        }
-                    }
-                }
-
-                frq = 0
-                timer = 0
-            }
-        }
-        return ret_frq
-
+        return detect_freq(channel, iopin, 0);
 
     }
 
