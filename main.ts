@@ -101,12 +101,15 @@ namespace KSR030 {
         pins.setPull(DigitalPin.P8, PinPullMode.PullUp);
         pins.setPull(DigitalPin.P12, PinPullMode.PullUp);
 
-        detect_freq(ServoNum.S0 , DigitalPin.P2 , 1);
+        //detect_freq(ServoNum.S0 , DigitalPin.P2 , 1);
+        i2c_write(MODE1, 0x00);
+            // Constrain the frequency
+        setFreq(50 * 1);
      
         initialized = true;
     }
 
-    function detect_freq(channel: ServoNum, iopin: DigitalPin, flag: number): number {
+    /*function detect_freq(channel: ServoNum, iopin: DigitalPin, flag: number): number {
         let frq = 0;
         let frqPinState = 0;
         let prevFrqPinState = 0;
@@ -200,7 +203,7 @@ namespace KSR030 {
         return ret_frq
 
 
-    }
+    }*/
 
 
     function setFreq(freq: number): void {
@@ -490,7 +493,8 @@ namespace KSR030 {
     //% weight=80
     export function DETECT_Frequency(channel: ServoNum, iopin: DigitalPin): number {
 
-        return detect_freq(channel, iopin, 0);
+        //return detect_freq(channel, iopin, 0);
+        return 0
 
     }
 
