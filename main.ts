@@ -101,14 +101,14 @@ namespace KSR030 {
         pins.setPull(DigitalPin.P8, PinPullMode.PullUp);
         pins.setPull(DigitalPin.P12, PinPullMode.PullUp);
 
-        detect_freq(ServoNum.S0 , DigitalPin.P2 , 1);
-        detect_freq(ServoNum.S0 , DigitalPin.P2 , 1);
+        //detect_freq(ServoNum.S0 , DigitalPin.P2 , 1);
+        //detect_freq(ServoNum.S0 , DigitalPin.P2 , 1);
              
         initialized = true;
     }
 
     function detect_freq(channel: ServoNum, iopin: DigitalPin, flag: number): number {
-        /*let frq = 0;
+        let frq = 0;
         let frqPinState = 0;
         let prevFrqPinState = 0;
         let oneSecond = 1000;
@@ -199,8 +199,8 @@ namespace KSR030 {
                 break;
             }
         }
-        return ret_frq*/
-        return 0
+        return ret_frq
+        //return 0
 
 
     }
