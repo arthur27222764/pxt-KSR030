@@ -132,64 +132,64 @@ namespace KSR030 {
                 if (frq > 53) {
                     //basic.showString("A")
                     //ret_frq = 65
-                    if (flag) {
+                    /*if (flag) {
                         i2c_write(MODE1, 0x00);
                         setFreq(50 * 0.92);
-                    }
+                    }*/
                     return 65
                 } else {
                     if (frq > 52) {
                         //basic.showString("B")
                         //ret_frq = 66
-                        if (flag) {
+                        /*if (flag) {
                             i2c_write(MODE1, 0x00);
                             setFreq(50 * 0.94);
-                        }
+                        }*/
                         return 66
                     } else {
                         if (frq > 51) {
                             //basic.showString("C")
                             //ret_frq = 67
-                            if (flag) {
+                            /*if (flag) {
                                 i2c_write(MODE1, 0x00);
                                 setFreq(50 * 0.96);
-                            }
+                            }*/
                             return 67
                         } else {
                             if (frq > 50) {
                                 //basic.showString("D")
                                 //ret_frq = 68
-                                if (flag) {
+                                /*if (flag) {
                                     i2c_write(MODE1, 0x00);
                                     setFreq(50 * 0.98);
-                                }
+                                }*/
                                 return 68
                             } else {
                                 if (frq > 49) {
                                     //basic.showString("E")
                                     //ret_frq = 69
-                                    if (flag) {
+                                    /*if (flag) {
                                         i2c_write(MODE1, 0x00);
                                         setFreq(50);
-                                    }
+                                    }*/
                                     return 69
                                 } else {
                                     if (frq > 48) {
                                         //basic.showString("F")
                                         //ret_frq = 70
-                                        if (flag) {
+                                        /*if (flag) {
                                             i2c_write(MODE1, 0x00);
                                             setFreq(50 * 1.02);
-                                        }
+                                        }*/
                                         return 70
                                     } else {
                                         if (frq <= 48) {
                                             //basic.showString("X")
                                             //ret_frq = 88
-                                            if (flag) {
+                                            /*if (flag) {
                                                 i2c_write(MODE1, 0x00);
                                                 setFreq(50 );
-                                            }
+                                            }*/
                                             return 88
 
                                         }
