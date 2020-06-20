@@ -101,8 +101,8 @@ namespace KSR030 {
         pins.setPull(DigitalPin.P8, PinPullMode.PullUp);
         pins.setPull(DigitalPin.P12, PinPullMode.PullUp);
 
-        detect_freq(ServoNum.S0 , DigitalPin.P2 , 1);
-        detect_freq(ServoNum.S0 , DigitalPin.P2 , 1);
+        //detect_freq(ServoNum.S0 , DigitalPin.P2 , 1);
+        //detect_freq(ServoNum.S0 , DigitalPin.P2 , 1);
              
         initialized = true;
     }
@@ -137,7 +137,7 @@ namespace KSR030 {
                         setFreq(50 * 0.92);
                     }
                     return 65
-                } /*else {
+                } else {
                     if (frq > 52) {
                         //basic.showString("B")
                         //ret_frq = 66
@@ -199,7 +199,7 @@ namespace KSR030 {
                             }
                         }
                     }
-                }*/
+                }
 
                 frq = 0
                 timer = 0
