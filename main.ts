@@ -423,7 +423,7 @@ namespace KSR030 {
             init()
         }
 
-        switch (index) {
+        /*switch (index) {
             case RunState.Forward:
                 l_pulselen = servo_map(90 + lspeed, 0, 180, SERVOMIN, SERVOMAX);
                 r_pulselen = servo_map(90 - rspeed, 0, 180, SERVOMIN, SERVOMAX);
@@ -455,7 +455,7 @@ namespace KSR030 {
                 setPwm(ServoNum.S9, 0, r_pulselen);
                 break;
 
-        }
+        }*/
     }
 
     //% blockId=KSR030_Motor_Car
