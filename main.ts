@@ -80,7 +80,7 @@ namespace KSR030 {
 
 
     let initialized = false;
-    //let neoStrip: neopixel.Strip;
+    let neoStrip: neopixel.Strip;
 
     function i2c_write(reg: number, value: number) {
 
@@ -137,7 +137,7 @@ namespace KSR030 {
                         setFreq(50 * 0.92);
                     }
                     return 65
-                } else {
+                } /*else {
                     if (frq > 52) {
                         //basic.showString("B")
                         //ret_frq = 66
@@ -199,7 +199,7 @@ namespace KSR030 {
                             }
                         }
                     }
-                }
+                }*/
 
                 frq = 0
                 timer = 0
