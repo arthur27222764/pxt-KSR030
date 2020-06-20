@@ -269,7 +269,7 @@ namespace KSR030 {
             case FrqState.A:
                 setFreq(50 * 0.92);
                 break;
-            case FrqState.B:
+            /*case FrqState.B:
                 setFreq(50 * 0.94);
                 break;
             case FrqState.C:
@@ -283,7 +283,7 @@ namespace KSR030 {
                 break;
             case FrqState.F:
                 setFreq(50 * 1.02);
-                break;
+                break;*/
 
 
         }
