@@ -436,7 +436,7 @@ namespace KSR030 {
                 setPwm(ServoNum.S8, 0, l_pulselen);
                 setPwm(ServoNum.S9, 0, r_pulselen);
                 break;
-            case RunState.Left:
+            /*case RunState.Left:
                 l_pulselen = servo_map(90 + lspeed, 0, 180, SERVOMIN, SERVOMAX);
                 r_pulselen = servo_map(90 - rspeed, 0, 180, SERVOMIN, SERVOMAX);
                 setPwm(ServoNum.S8, 0, l_pulselen);
@@ -448,7 +448,7 @@ namespace KSR030 {
                 setPwm(ServoNum.S8, 0, l_pulselen);
                 setPwm(ServoNum.S9, 0, r_pulselen);
                 break;
-            /*case RunState.Stop:
+            case RunState.Stop:
                 l_pulselen = servo_map(90, 0, 180, SERVOMIN, SERVOMAX);
                 r_pulselen = servo_map(90, 0, 180, SERVOMIN, SERVOMAX);
                 setPwm(ServoNum.S8, 0, l_pulselen);
