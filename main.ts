@@ -108,7 +108,7 @@ namespace KSR030 {
     }
 
     function detect_freq(channel: ServoNum, iopin: DigitalPin, flag: number): number {
-        let frq = 0;
+        /*let frq = 0;
         let frqPinState = 0;
         let prevFrqPinState = 0;
         let oneSecond = 1000;
@@ -199,7 +199,8 @@ namespace KSR030 {
                 break;
             }
         }
-        return ret_frq
+        return ret_frq*/
+        return 0
 
 
     }
