@@ -80,7 +80,7 @@ namespace KSR030 {
 
 
     let initialized = false;
-    let neoStrip: neopixel.Strip;
+    //let neoStrip: neopixel.Strip;
 
     function i2c_write(reg: number, value: number) {
 
@@ -331,7 +331,7 @@ namespace KSR030 {
             return -1
         }
     }
-
+/*
     //% blockId="KSR030_RGB" 
     //% block="RGB LED "
     //% weight=96
@@ -342,7 +342,7 @@ namespace KSR030 {
         }
 
         return neoStrip;
-    }
+    }*/
 
     /**
      * Used to move the given servo to the specified degrees (0-180) connected to the KSR030
