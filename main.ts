@@ -253,10 +253,7 @@ namespace KSR030 {
         }
         return x;
     }
-    function freqset(x: number) {
-       i2c_write(MODE1, 0x00);
-       setFreq(x);
-    }
+    
 
     //% blockId=KSR030_Frq_Set
     //% block="PWM Frequency Set %frqval"
@@ -271,27 +268,27 @@ namespace KSR030 {
         } else if (frqval == FrqState.B) {
             
             // Constrain the frequency
-            freqset(50 * 0.94);
+            setFreq(50 * 0.94);
 
         } else if (frqval == FrqState.C) {
             
             // Constrain the frequency
-            freqset(50 * 0.96);
+            setFreq(50 * 0.96);
 
         } else if (frqval == FrqState.D) {
             
             // Constrain the frequency
-            freqset(50 * 0.98);
+            setFreq(50 * 0.98);
 
         } else if (frqval == FrqState.E) {
             
             // Constrain the frequency
-            freqset(50 * 1);
+            setFreq(50 * 1);
 
         } else if (frqval == FrqState.F) {
             
             // Constrain the frequency
-            freqset(50 * 1.02);
+            setFreq(50 * 1.02);
 
         }
     }
