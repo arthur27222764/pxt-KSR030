@@ -101,15 +101,13 @@ namespace KSR030 {
         pins.setPull(DigitalPin.P8, PinPullMode.PullUp);
         pins.setPull(DigitalPin.P12, PinPullMode.PullUp);
 
-        //detect_freq(ServoNum.S0 , DigitalPin.P2 , 1);
-        i2c_write(MODE1, 0x00);
-            // Constrain the frequency
-        setFreq(50 * 1);
-     
+        detect_freq(ServoNum.S0 , DigitalPin.P2 , 1);
+        detect_freq(ServoNum.S0 , DigitalPin.P2 , 1);
+             
         initialized = true;
     }
 
-    /*function detect_freq(channel: ServoNum, iopin: DigitalPin, flag: number): number {
+    function detect_freq(channel: ServoNum, iopin: DigitalPin, flag: number): number {
         let frq = 0;
         let frqPinState = 0;
         let prevFrqPinState = 0;
@@ -184,7 +182,7 @@ namespace KSR030 {
                                             ret_frq = 88
                                             if (flag) {
                                                 i2c_write(MODE1, 0x00);
-                                                setFreq(50 * 1.04);
+                                                setFreq(50 );
                                             }
 
                                         }
@@ -198,12 +196,13 @@ namespace KSR030 {
 
                 frq = 0
                 timer = 0
+                break;
             }
         }
         return ret_frq
 
 
-    }*/
+    }
 
 
     function setFreq(freq: number): void {
@@ -417,35 +416,38 @@ namespace KSR030 {
     //% weight=88
     //% lspeed.min=-90 lspeed.max=90 rspeed.min=-90 rspeed.max=90
     export function Servo_Car(index: RunState, lspeed: number, rspeed: number): void {
-        let l_pulselen = 0;
-        let r_pulselen = 0;
+        
         if (!initialized) {
             init()
         }
 
         switch (index) {
-            case RunState.Forward: 
-                Servo(ServoNum.S8, 90+lspeed);
-                Servo(ServoNum.S9, 90-rspeed);
+            case RunState.Forward:
+
+                Servo(ServoNum.S8, 90 + lspeed);
+                Servo(ServoNum.S9, 90 - rspeed);
+                break;
+            case RunState.Back:
                 
+                Servo(ServoNum.S8, 90 - lspeed);
+                Servo(ServoNum.S9, 90 + rspeed);
                 break;
-            case RunState.Back: 
-                Servo(ServoNum.S8, 90+lspeed);
-                Servo(ServoNum.S9, 90-rspeed);
+            case RunState.Left:
+                
+                Servo(ServoNum.S8, 90 + lspeed);
+                Servo(ServoNum.S9, 90 - rspeed);
                 break;
-            case RunState.Left: 
-                Servo(ServoNum.S8, 90+lspeed);
-                Servo(ServoNum.S9, 90-rspeed);
+            case RunState.Right:
+                
+                Servo(ServoNum.S8, 90 + lspeed);
+                Servo(ServoNum.S9, 90 - rspeed);
                 break;
-            case RunState.Right: 
-                Servo(ServoNum.S8, 90+lspeed);
-                Servo(ServoNum.S9, 90-rspeed);
+            case RunState.Stop:
+                
+                Servo(ServoNum.S8, 90 );
+                Servo(ServoNum.S9, 90 );
                 break;
-            case RunState.Stop: 
-                Servo(ServoNum.S8, 90+lspeed);
-                Servo(ServoNum.S9, 90-rspeed);
-                break;
-            
+
         }
     }
 
@@ -484,8 +486,7 @@ namespace KSR030 {
     //% weight=80
     export function DETECT_Frequency(channel: ServoNum, iopin: DigitalPin): number {
 
-        //return detect_freq(channel, iopin, 0);
-        return 0
+        return detect_freq(channel, iopin, 0);
 
     }
 

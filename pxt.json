@@ -1,24 +1,20 @@
 {
     "name": "KSR030",
-    "version": "0.5.0",
+    "version": "0.6.2",
     "description": "Extension for KAISE KSRobot KSR030 Robot",
-    "license": "MIT",
+    "license": "MIT", 
     "dependencies": {
         "core": "*",
-        "neopixel": "github:microsoft/pxt-neopixel#v0.7.3",
-        "ws2812b": "github:microsoft/pxt-ws2812b#v0.1.1"
+        "neopixel": "github:microsoft/pxt-neopixel"
     },
     "files": [
         "main.ts",
         "README.md",
-        "_locales/zh/KSR030-strings.json"
+        "_locales/zh/KSR030-strings.json" 
+        
     ],
     "testFiles": [
-        "tests.ts"
+      "tests.ts"
     ],
-    "public": true,
-    "supportedTargets": [
-        "microbit"
-    ],
-    "preferredEditor": "tsprj"
+    "public": true
 }
