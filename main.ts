@@ -218,6 +218,7 @@ namespace KSR030 {
         prescaleval -= 1;
         let prescale = prescaleval;
         //let prescale = 121;
+        i2c_write(MODE1, 0x00);
         let oldmode = i2c_read(MODE1);
         let newmode = (oldmode & 0x7F) | 0x10; // sleep
         i2c_write(MODE1, newmode); // go to sleep
