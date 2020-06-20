@@ -101,8 +101,8 @@ namespace KSR030 {
         pins.setPull(DigitalPin.P8, PinPullMode.PullUp);
         pins.setPull(DigitalPin.P12, PinPullMode.PullUp);
 
-        //detect_freq(ServoNum.S0 , DigitalPin.P2 , 1);
-        //detect_freq(ServoNum.S0 , DigitalPin.P2 , 1);
+        detect_freq(ServoNum.S0 , DigitalPin.P2 , 1);
+        detect_freq(ServoNum.S0 , DigitalPin.P2 , 1);
              
         initialized = true;
     }
