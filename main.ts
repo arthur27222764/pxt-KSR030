@@ -282,7 +282,7 @@ namespace KSR030 {
                 setFreq(50 );
                 break;
             case FrqState.F:
-                setFreq(50 * 1.02;
+                setFreq(50 * 1.02);
                 break;
 
 
