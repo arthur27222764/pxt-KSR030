@@ -100,10 +100,8 @@ namespace KSR030 {
     function init(): void {
         pins.setPull(DigitalPin.P8, PinPullMode.PullUp);
         pins.setPull(DigitalPin.P12, PinPullMode.PullUp);
-        i2c_write(MODE1, 0x00);
-        // Constrain the frequency
-        setFreq(50);
-        set_pwm(detect_freq(ServoNum.S0, DigitalPin.P2));
+
+        servo_pwm(detect_freq(ServoNum.S0, DigitalPin.P2));
         initialized = true;
     }
 
@@ -171,11 +169,11 @@ namespace KSR030 {
             }
         }
         return ret_frq
-        
+
 
     }
 
-    function set_pwm(frqval: number):void {
+    function servo_pwm(frqval: number): void {
 
         if (frqval == FrqState.A) {
             i2c_write(MODE1, 0x00);
@@ -206,6 +204,11 @@ namespace KSR030 {
             i2c_write(MODE1, 0x00);
             // Constrain the frequency
             setFreq(50 * 1.02);
+
+        } else {
+            i2c_write(MODE1, 0x00);
+            // Constrain the frequency
+            setFreq(50 );
 
         }
 
@@ -260,39 +263,9 @@ namespace KSR030 {
         if (!initialized) {
             init()
         }
-        set_pwm(frqval);
+        servo_pwm(frqval);
 
-        /*if (frqval == FrqState.A) {
-            i2c_write(MODE1, 0x00);
-            // Constrain the frequency
-            setFreq(50 * 0.92);
 
-        } else if (frqval == FrqState.B) {
-            i2c_write(MODE1, 0x00);
-            // Constrain the frequency
-            setFreq(50 * 0.94);
-
-        } else if (frqval == FrqState.C) {
-            i2c_write(MODE1, 0x00);
-            // Constrain the frequency
-            setFreq(50 * 0.96);
-
-        } else if (frqval == FrqState.D) {
-            i2c_write(MODE1, 0x00);
-            // Constrain the frequency
-            setFreq(50 * 0.98);
-
-        } else if (frqval == FrqState.E) {
-            i2c_write(MODE1, 0x00);
-            // Constrain the frequency
-            setFreq(50 * 1);
-
-        } else if (frqval == FrqState.F) {
-            i2c_write(MODE1, 0x00);
-            // Constrain the frequency
-            setFreq(50 * 1.02);
-
-        }*/
     }
 
     //% blockId=KSR030_Ultrasonic 
