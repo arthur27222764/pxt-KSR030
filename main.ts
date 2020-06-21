@@ -37,14 +37,14 @@ namespace KSR030 {
         //% blockId="Left_LED" block="Left"
         L_LED = 0,
         //% blockId="Right_LED" block="Right"
-        R_LED = 1,
+        R_LED = 1
 
     }
     export enum Track {
         //% blockId="TrackLeft" block="Left"
         Left = 0,
         //% blockId="TrackRight" block="Right"
-        Right = 1,
+        Right = 1
     }
 
     export enum RunState {
@@ -57,7 +57,7 @@ namespace KSR030 {
         //% blockId="GO_Right" block="Right"
         Right = 3,
         //% blockId="Go_Stop" block="Stop"
-        Stop = 4,
+        Stop = 4
 
     }
     export enum FrqState {
@@ -72,7 +72,7 @@ namespace KSR030 {
         //% blockId="Frq_E" block="E"
         E = 4,
         //% blockId="Frq_F" block="F"
-        F = 5,
+        F = 5
 
     }
 
