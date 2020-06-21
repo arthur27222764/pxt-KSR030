@@ -185,7 +185,7 @@ namespace KSR030 {
 
                 frq = 0
                 timer = 0
-                break;
+                //break;
             }
         }
         return ret_frq
