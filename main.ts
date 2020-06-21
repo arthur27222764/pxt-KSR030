@@ -269,10 +269,12 @@ namespace KSR030 {
         }
         switch (frqval) {
             case FrqState.A:
-                //setFreq(50 * 0.92);
+                i2c_write(MODE1, 0x00);
+                setFreq(50 * 0.92);
                 break;
             case FrqState.B:
-                //setFreq(50 * 0.94);
+                i2c_write(MODE1, 0x00);
+                setFreq(50 * 0.94);
                 break;
             case FrqState.C:
                 //setFreq(50 * 0.96);
