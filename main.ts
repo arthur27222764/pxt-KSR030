@@ -104,7 +104,7 @@ namespace KSR030 {
         detect_freq(ServoNum.S0, DigitalPin.P2, 1);
         detect_freq(ServoNum.S0, DigitalPin.P2, 1);
         i2c_write(MODE1, 0x00);
-        //setFreq(50);
+        setFreq(50);
 
         initialized = true;
     }
