@@ -104,24 +104,24 @@ namespace KSR030 {
         //detect_freq(ServoNum.S0, DigitalPin.P2, 1);
         //detect_freq(ServoNum.S0, DigitalPin.P2, 1);
         switch (0) {
-            case FrqState.A:
+            case 0:
                 i2c_write(MODE1, 0x00);
                 setFreq(50 * 0.92);
                 break;
-            case FrqState.B:
+            case 1:
                 i2c_write(MODE1, 0x00);
                 setFreq(50 * 0.94);
                 break;
-            case FrqState.C:
+            case 2:
                 //setFreq(50 * 0.96);
                 break;
-            case FrqState.D:
+            case 3:
                 //setFreq(50 * 0.98);
                 break;
-            case FrqState.E:
+            case 4:
                 //setFreq(50 );
                 break;
-            case FrqState.F:
+            case 5:
                 //setFreq(50 * 1.02);
                 break;
 
