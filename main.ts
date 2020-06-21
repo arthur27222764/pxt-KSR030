@@ -24,27 +24,27 @@ namespace KSR030 {
         S8 = 8,
         S9 = 9,
         S10 = 10,
-        S11 = 11
+        S11 = 11,
     }
     export enum MotorNum {
         //% blockId="M1A" block="Right"
         M1A = 0,
         //% blockId="M1B" block="Left"
-        M1B = 1
+        M1B = 1,
 
     }
     export enum LedNum {
         //% blockId="Left_LED" block="Left"
         L_LED = 0,
         //% blockId="Right_LED" block="Right"
-        R_LED = 1
+        R_LED = 1,
 
     }
     export enum Track {
         //% blockId="TrackLeft" block="Left"
         Left = 0,
         //% blockId="TrackRight" block="Right"
-        Right = 1
+        Right = 1,
     }
 
     export enum RunState {
@@ -57,7 +57,7 @@ namespace KSR030 {
         //% blockId="GO_Right" block="Right"
         Right = 3,
         //% blockId="Go_Stop" block="Stop"
-        Stop = 4
+        Stop = 4,
 
     }
     export enum FrqState {
@@ -72,7 +72,7 @@ namespace KSR030 {
         //% blockId="Frq_E" block="E"
         E = 4,
         //% blockId="Frq_F" block="F"
-        F = 5
+        F = 5,
 
     }
 
@@ -101,34 +101,9 @@ namespace KSR030 {
         pins.setPull(DigitalPin.P8, PinPullMode.PullUp);
         pins.setPull(DigitalPin.P12, PinPullMode.PullUp);
 
-        //detect_freq(ServoNum.S0, DigitalPin.P2, 1);
-        //detect_freq(ServoNum.S0, DigitalPin.P2, 1);
-        switch (0) {
-            case 0:
-                i2c_write(MODE1, 0x00);
-                setFreq(50 * 0.92);
-                break;
-            case 0:
-                i2c_write(MODE1, 0x00);
-                setFreq(50 * 0.94);
-                break;
-            case 0:
-                //setFreq(50 * 0.96);
-                break;
-            case 0:
-                //setFreq(50 * 0.98);
-                break;
-            case 0:
-                //setFreq(50 );
-                break;
-            case 0:
-                //setFreq(50 * 1.02);
-                break;
-
-
-        }
-        
-
+        detect_freq(ServoNum.S0 , DigitalPin.P2 , 1);
+        detect_freq(ServoNum.S0 , DigitalPin.P2 , 1);
+             
         initialized = true;
     }
 
@@ -136,9 +111,9 @@ namespace KSR030 {
         let frq = 0;
         let frqPinState = 0;
         let prevFrqPinState = 0;
-        //let oneSecond = 1000;
+        let oneSecond = 1000;
         let timer = 0;
-        //let ret_frq = 0;
+        let ret_frq = 0;
 
         setPwm(channel, 0, SERVOMAX);
         for (let i = 0; i < 2000; i++) {
@@ -152,70 +127,63 @@ namespace KSR030 {
             }
             control.waitMicros(1000)
             timer = timer + 1
-            if (timer > 1000) {
+            if (timer > oneSecond) {
                 frq = frq - 2
                 if (frq > 53) {
                     //basic.showString("A")
-                    //ret_frq = 65
-                    /*if (flag) {
+                    ret_frq = 65
+                    if (flag) {
                         i2c_write(MODE1, 0x00);
                         setFreq(50 * 0.92);
-                    }*/
-                    return 65
+                    }
                 } else {
                     if (frq > 52) {
                         //basic.showString("B")
-                        //ret_frq = 66
-                        /*if (flag) {
+                        ret_frq = 66
+                        if (flag) {
                             i2c_write(MODE1, 0x00);
                             setFreq(50 * 0.94);
-                        }*/
-                        return 66
+                        }
                     } else {
                         if (frq > 51) {
                             //basic.showString("C")
-                            //ret_frq = 67
-                            /*if (flag) {
+                            ret_frq = 67
+                            if (flag) {
                                 i2c_write(MODE1, 0x00);
                                 setFreq(50 * 0.96);
-                            }*/
-                            return 67
+                            }
                         } else {
                             if (frq > 50) {
                                 //basic.showString("D")
-                                //ret_frq = 68
-                                /*if (flag) {
+                                ret_frq = 68
+                                if (flag) {
                                     i2c_write(MODE1, 0x00);
                                     setFreq(50 * 0.98);
-                                }*/
-                                return 68
+                                }
                             } else {
                                 if (frq > 49) {
                                     //basic.showString("E")
-                                    //ret_frq = 69
-                                    /*if (flag) {
+                                    ret_frq = 69
+                                    if (flag) {
                                         i2c_write(MODE1, 0x00);
                                         setFreq(50);
-                                    }*/
-                                    return 69
+                                    }
                                 } else {
                                     if (frq > 48) {
                                         //basic.showString("F")
-                                        //ret_frq = 70
-                                        /*if (flag) {
+                                        ret_frq = 70
+                                        if (flag) {
                                             i2c_write(MODE1, 0x00);
                                             setFreq(50 * 1.02);
-                                        }*/
-                                        return 70
+                                        }
                                     } else {
                                         if (frq <= 48) {
                                             //basic.showString("X")
-                                            //ret_frq = 88
-                                            /*if (flag) {
+                                            ret_frq = 88
+                                            if (flag) {
                                                 i2c_write(MODE1, 0x00);
                                                 setFreq(50 );
-                                            }*/
-                                            return 88
+                                            }
 
                                         }
                                     }
@@ -228,11 +196,10 @@ namespace KSR030 {
 
                 frq = 0
                 timer = 0
-                break;
+                brrak;
             }
         }
-        //return ret_frq
-        return 88
+        return ret_frq
 
 
     }
@@ -268,7 +235,6 @@ namespace KSR030 {
     function servo_map(x: number, in_min: number, in_max: number, out_min: number, out_max: number) {
         return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
     }
-    
     function motor_map(x: number) {
         x = x * 16; // map 255 to 4096
         if (x > 4095) {
@@ -279,7 +245,6 @@ namespace KSR030 {
         }
         return x;
     }
-
 
     //% blockId=KSR030_Frq_Set
     //% block="PWM Frequency Set %frqval"
@@ -299,23 +264,23 @@ namespace KSR030 {
                 setFreq(50 * 0.94);
                 break;
             case FrqState.C:
-                //setFreq(50 * 0.96);
+                i2c_write(MODE1, 0x00);
+                setFreq(50 * 0.96);
                 break;
             case FrqState.D:
-                //setFreq(50 * 0.98);
+                i2c_write(MODE1, 0x00);
+                setFreq(50 * 0.98);
                 break;
             case FrqState.E:
-                //setFreq(50 );
+                i2c_write(MODE1, 0x00);
+                setFreq(50 );
                 break;
             case FrqState.F:
-                //setFreq(50 * 1.02);
+                i2c_write(MODE1, 0x00);
+                setFreq(50 * 1.02);
                 break;
 
-
         }
-
-
-
     }
 
     //% blockId=KSR030_Ultrasonic 
@@ -447,7 +412,7 @@ namespace KSR030 {
     //% weight=88
     //% lspeed.min=-90 lspeed.max=90 rspeed.min=-90 rspeed.max=90
     export function Servo_Car(index: RunState, lspeed: number, rspeed: number): void {
-
+        
         if (!initialized) {
             init()
         }
@@ -459,24 +424,24 @@ namespace KSR030 {
                 Servo(ServoNum.S9, 90 - rspeed);
                 break;
             case RunState.Back:
-
+                
                 Servo(ServoNum.S8, 90 - lspeed);
                 Servo(ServoNum.S9, 90 + rspeed);
                 break;
             case RunState.Left:
-
+                
                 Servo(ServoNum.S8, 90 + lspeed);
                 Servo(ServoNum.S9, 90 - rspeed);
                 break;
             case RunState.Right:
-
+                
                 Servo(ServoNum.S8, 90 + lspeed);
                 Servo(ServoNum.S9, 90 - rspeed);
                 break;
             case RunState.Stop:
-
-                Servo(ServoNum.S8, 90);
-                Servo(ServoNum.S9, 90);
+                
+                Servo(ServoNum.S8, 90 );
+                Servo(ServoNum.S9, 90 );
                 break;
 
         }
