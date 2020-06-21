@@ -103,6 +103,7 @@ namespace KSR030 {
         i2c_write(MODE1, 0x00);
         // Constrain the frequency
         setFreq(50);
+        set_pwm(detect_freq(ServoNum.S0, DigitalPin.P2));
         initialized = true;
     }
 
