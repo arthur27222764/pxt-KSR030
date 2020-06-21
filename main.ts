@@ -102,7 +102,7 @@ namespace KSR030 {
         pins.setPull(DigitalPin.P12, PinPullMode.PullUp);
 
         detect_freq(ServoNum.S0, DigitalPin.P2, 1);
-        detect_freq(ServoNum.S0, DigitalPin.P2, 1);
+        //detect_freq(ServoNum.S0, DigitalPin.P2, 1);
         i2c_write(MODE1, 0x00);
         //setFreq(50);
         let prescaleval = 25000000 / 4096 / 50;
