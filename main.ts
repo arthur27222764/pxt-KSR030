@@ -100,14 +100,13 @@ namespace KSR030 {
     function init(): void {
         pins.setPull(DigitalPin.P8, PinPullMode.PullUp);
         pins.setPull(DigitalPin.P12, PinPullMode.PullUp);
-
-        detect_freq(ServoNum.S0, DigitalPin.P2, 1);
-        detect_freq(ServoNum.S0, DigitalPin.P2, 1);
-
+        i2c_write(MODE1, 0x00);
+        // Constrain the frequency
+        setFreq(50);
         initialized = true;
     }
 
-    function detect_freq(channel: ServoNum, iopin: DigitalPin, flag: number): number {
+    function detect_freq(channel: ServoNum, iopin: DigitalPin): number {
         let frq = 0;
         let frqPinState = 0;
         let prevFrqPinState = 0;
@@ -129,70 +128,50 @@ namespace KSR030 {
             timer = timer + 1
             if (timer > oneSecond) {
                 frq = frq - 2
+                if (frq > 53) {
+                    //basic.showString("A")
+                    ret_frq = 65
+                } else {
+                    if (frq > 52) {
+                        //basic.showString("B")
+                        ret_frq = 66
+                    } else {
+                        if (frq > 51) {
+                            //basic.showString("C")
+                            ret_frq = 67
+                        } else {
+                            if (frq > 50) {
+                                //basic.showString("D")
+                                ret_frq = 68
+                            } else {
+                                if (frq > 49) {
+                                    //basic.showString("E")
+                                    ret_frq = 69
+                                } else {
+                                    if (frq > 48) {
+                                        //basic.showString("F")
+                                        ret_frq = 70
+                                    } else {
+                                        if (frq <= 48) {
+                                            //basic.showString("X")
+                                            ret_frq = 88
 
-                switch (frq) {
-                    case 54: //A
-                        ret_frq = 65
-                        if (flag) {
-                            i2c_write(MODE1, 0x00);
-                            setFreq(50 * 0.92);
-                        }
-                        break
-                    case 53: //B
-                        ret_frq = 65
-                        if (flag) {
-                            i2c_write(MODE1, 0x00);
-                            setFreq(50 * 0.94);
-                        }
-                        break
-                    case 52: //C
-                        ret_frq = 65
-                        if (flag) {
-                            i2c_write(MODE1, 0x00);
-                            setFreq(50 * 0.96);
-                        }
-                        break
-                    case 51: //D
-                        ret_frq = 65
-                        if (flag) {
-                            i2c_write(MODE1, 0x00);
-                            setFreq(50 * 0.98);
-                        }
-                        break
-                    case 50: //E
-                        ret_frq = 65
-                        if (flag) {
-                            i2c_write(MODE1, 0x00);
-                            setFreq(50 );
-                        }
-                        break
-                    case 49: //F
-                        ret_frq = 65
-                        if (flag) {
-                            i2c_write(MODE1, 0x00);
-                            setFreq(50 * 1.02);
-                        }
-                        break
-                    default: //X
-                        ret_frq = 88
-                        if (flag) {
-                            i2c_write(MODE1, 0x00);
-                            setFreq(50);
-                        }
+                                        }
+                                    }
 
-                        
+                                }
+                            }
+                        }
+                    }
                 }
 
                 frq = 0
                 timer = 0
-                //break;
             }
         }
         return ret_frq
 
-
     }
-
 
     function setFreq(freq: number): void {
         let prescaleval = 25000000 / 4096 / freq;
@@ -243,31 +222,35 @@ namespace KSR030 {
         if (!initialized) {
             init()
         }
-        switch (frqval) {
-            case FrqState.A:
-                i2c_write(MODE1, 0x00);
-                setFreq(50 * 0.92);
-                break;
-            case FrqState.B:
-                i2c_write(MODE1, 0x00);
-                setFreq(50 * 0.94);
-                break;
-            case FrqState.C:
-                i2c_write(MODE1, 0x00);
-                setFreq(50 * 0.96);
-                break;
-            case FrqState.D:
-                i2c_write(MODE1, 0x00);
-                setFreq(50 * 0.98);
-                break;
-            case FrqState.E:
-                i2c_write(MODE1, 0x00);
-                setFreq(50);
-                break;
-            case FrqState.F:
-                i2c_write(MODE1, 0x00);
-                setFreq(50 * 1.02);
-                break;
+        if (frqval == FrqState.A) {
+            i2c_write(MODE1, 0x00);
+            // Constrain the frequency
+            setFreq(50 * 0.92);
+
+        } else if (frqval == FrqState.B) {
+            i2c_write(MODE1, 0x00);
+            // Constrain the frequency
+            setFreq(50 * 0.94);
+
+        } else if (frqval == FrqState.C) {
+            i2c_write(MODE1, 0x00);
+            // Constrain the frequency
+            setFreq(50 * 0.96);
+
+        } else if (frqval == FrqState.D) {
+            i2c_write(MODE1, 0x00);
+            // Constrain the frequency
+            setFreq(50 * 0.98);
+
+        } else if (frqval == FrqState.E) {
+            i2c_write(MODE1, 0x00);
+            // Constrain the frequency
+            setFreq(50 * 1);
+
+        } else if (frqval == FrqState.F) {
+            i2c_write(MODE1, 0x00);
+            // Constrain the frequency
+            setFreq(50 * 1.02);
 
         }
     }
@@ -401,36 +384,42 @@ namespace KSR030 {
     //% weight=88
     //% lspeed.min=-90 lspeed.max=90 rspeed.min=-90 rspeed.max=90
     export function Servo_Car(index: RunState, lspeed: number, rspeed: number): void {
-
+        let l_pulselen = 0;
+        let r_pulselen = 0;
         if (!initialized) {
             init()
         }
 
         switch (index) {
             case RunState.Forward:
-
-                Servo(ServoNum.S8, 90 + lspeed);
-                Servo(ServoNum.S9, 90 - rspeed);
+                l_pulselen = servo_map(90 + lspeed, 0, 180, SERVOMIN, SERVOMAX);
+                r_pulselen = servo_map(90 - rspeed, 0, 180, SERVOMIN, SERVOMAX);
+                setPwm(ServoNum.S8, 0, l_pulselen);
+                setPwm(ServoNum.S9, 0, r_pulselen);
                 break;
             case RunState.Back:
-
-                Servo(ServoNum.S8, 90 - lspeed);
-                Servo(ServoNum.S9, 90 + rspeed);
+                l_pulselen = servo_map(90 - lspeed, 0, 180, SERVOMIN, SERVOMAX);
+                r_pulselen = servo_map(90 + rspeed, 0, 180, SERVOMIN, SERVOMAX);
+                setPwm(ServoNum.S8, 0, l_pulselen);
+                setPwm(ServoNum.S9, 0, r_pulselen);
                 break;
             case RunState.Left:
-
-                Servo(ServoNum.S8, 90 + lspeed);
-                Servo(ServoNum.S9, 90 - rspeed);
+                l_pulselen = servo_map(90 + lspeed, 0, 180, SERVOMIN, SERVOMAX);
+                r_pulselen = servo_map(90 - rspeed, 0, 180, SERVOMIN, SERVOMAX);
+                setPwm(ServoNum.S8, 0, l_pulselen);
+                setPwm(ServoNum.S9, 0, r_pulselen);
                 break;
             case RunState.Right:
-
-                Servo(ServoNum.S8, 90 + lspeed);
-                Servo(ServoNum.S9, 90 - rspeed);
+                l_pulselen = servo_map(90 + lspeed, 0, 180, SERVOMIN, SERVOMAX);
+                r_pulselen = servo_map(90 - rspeed, 0, 180, SERVOMIN, SERVOMAX);
+                setPwm(ServoNum.S8, 0, l_pulselen);
+                setPwm(ServoNum.S9, 0, r_pulselen);
                 break;
             case RunState.Stop:
-
-                Servo(ServoNum.S8, 90);
-                Servo(ServoNum.S9, 90);
+                l_pulselen = servo_map(90, 0, 180, SERVOMIN, SERVOMAX);
+                r_pulselen = servo_map(90, 0, 180, SERVOMIN, SERVOMAX);
+                setPwm(ServoNum.S8, 0, l_pulselen);
+                setPwm(ServoNum.S9, 0, r_pulselen);
                 break;
 
         }
@@ -471,7 +460,13 @@ namespace KSR030 {
     //% weight=80
     export function DETECT_Frequency(channel: ServoNum, iopin: DigitalPin): number {
 
-        return detect_freq(channel, iopin, 0);
+
+        if (!initialized) {
+            init()
+        }
+
+        return detect_freq(channel, iopin);
+
 
     }
 
