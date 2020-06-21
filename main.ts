@@ -269,23 +269,23 @@ namespace KSR030 {
         }
         switch (frqval) {
             case FrqState.A:
-                setFreq(50 * 0.92);
+                //setFreq(50 * 0.92);
                 break;
-            /*case FrqState.B:
-                setFreq(50 * 0.94);
+            case FrqState.B:
+                //setFreq(50 * 0.94);
                 break;
             case FrqState.C:
-                setFreq(50 * 0.96);
+                //setFreq(50 * 0.96);
                 break;
             case FrqState.D:
-                setFreq(50 * 0.98);
+                //setFreq(50 * 0.98);
                 break;
             case FrqState.E:
-                setFreq(50 );
+                //setFreq(50 );
                 break;
             case FrqState.F:
-                setFreq(50 * 1.02);
-                break;*/
+                //setFreq(50 * 1.02);
+                break;
 
 
         }
