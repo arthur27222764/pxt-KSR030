@@ -62,17 +62,17 @@ namespace KSR030 {
     }
     export enum FrqState {
         //% blockId="Frq_A" block="A"
-        A = 0,
+        A = 65,
         //% blockId="Frq_B" block="B"
-        B = 1,
+        B = 66,
         //% blockId="Frq_C" block="C"
-        C = 2,
+        C = 67,
         //% blockId="Frq_D" block="D"
-        D = 3,
+        D = 68,
         //% blockId="Frq_E" block="E"
-        E = 4,
+        E = 69,
         //% blockId="Frq_F" block="F"
-        F = 5,
+        F = 70
 
     }
 
@@ -174,6 +174,42 @@ namespace KSR030 {
 
     }
 
+    function set_pwm(frqval: number):void {
+
+        if (frqval == FrqState.A) {
+            i2c_write(MODE1, 0x00);
+            // Constrain the frequency
+            setFreq(50 * 0.92);
+
+        } else if (frqval == FrqState.B) {
+            i2c_write(MODE1, 0x00);
+            // Constrain the frequency
+            setFreq(50 * 0.94);
+
+        } else if (frqval == FrqState.C) {
+            i2c_write(MODE1, 0x00);
+            // Constrain the frequency
+            setFreq(50 * 0.96);
+
+        } else if (frqval == FrqState.D) {
+            i2c_write(MODE1, 0x00);
+            // Constrain the frequency
+            setFreq(50 * 0.98);
+
+        } else if (frqval == FrqState.E) {
+            i2c_write(MODE1, 0x00);
+            // Constrain the frequency
+            setFreq(50 * 1);
+
+        } else if (frqval == FrqState.F) {
+            i2c_write(MODE1, 0x00);
+            // Constrain the frequency
+            setFreq(50 * 1.02);
+
+        }
+
+    }
+
     function setFreq(freq: number): void {
         let prescaleval = 25000000 / 4096 / freq;
         prescaleval -= 1;
@@ -223,7 +259,9 @@ namespace KSR030 {
         if (!initialized) {
             init()
         }
-        if (frqval == FrqState.A) {
+        set_pwm(frqval);
+
+        /*if (frqval == FrqState.A) {
             i2c_write(MODE1, 0x00);
             // Constrain the frequency
             setFreq(50 * 0.92);
@@ -253,7 +291,7 @@ namespace KSR030 {
             // Constrain the frequency
             setFreq(50 * 1.02);
 
-        }
+        }*/
     }
 
     //% blockId=KSR030_Ultrasonic 
