@@ -101,8 +101,108 @@ namespace KSR030 {
         pins.setPull(DigitalPin.P8, PinPullMode.PullUp);
         pins.setPull(DigitalPin.P12, PinPullMode.PullUp);
 
-        detect_freq(ServoNum.S0, DigitalPin.P2, 1);
         //detect_freq(ServoNum.S0, DigitalPin.P2, 1);
+        //detect_freq(ServoNum.S0, DigitalPin.P2, 1);
+        let frq = 0;
+        let frqPinState = 0;
+        let prevFrqPinState = 0;
+        //let oneSecond = 1000;
+        let timer = 0;
+        //let ret_frq = 0;
+
+        setPwm(ServoNum.S0, 0, SERVOMAX);
+        for (let i = 0; i < 2000; i++) {
+            frqPinState = pins.digitalReadPin(DigitalPin.P2)
+            if (frqPinState == 0) {
+                prevFrqPinState = 0
+            }
+            if (frqPinState == 1 && prevFrqPinState == 0) {
+                prevFrqPinState = frqPinState
+                frq = frq + 1
+            }
+            control.waitMicros(1000)
+            timer = timer + 1
+            if (timer > 1000) {
+                frq = frq - 2
+                if (frq > 53) {
+                    //basic.showString("A")
+                    //ret_frq = 65
+                    /*if (flag) {
+                        i2c_write(MODE1, 0x00);
+                        setFreq(50 * 0.92);
+                    }*/
+                    //return 65
+                } else {
+                    if (frq > 52) {
+                        //basic.showString("B")
+                        //ret_frq = 66
+                        /*if (flag) {
+                            i2c_write(MODE1, 0x00);
+                            setFreq(50 * 0.94);
+                        }*/
+                        //return 66
+                    } else {
+                        if (frq > 51) {
+                            //basic.showString("C")
+                            //ret_frq = 67
+                            /*if (flag) {
+                                i2c_write(MODE1, 0x00);
+                                setFreq(50 * 0.96);
+                            }*/
+                            //return 67
+                        } else {
+                            if (frq > 50) {
+                                //basic.showString("D")
+                                //ret_frq = 68
+                                /*if (flag) {
+                                    i2c_write(MODE1, 0x00);
+                                    setFreq(50 * 0.98);
+                                }*/
+                                //return 68
+                            } else {
+                                if (frq > 49) {
+                                    //basic.showString("E")
+                                    //ret_frq = 69
+                                    /*if (flag) {
+                                        i2c_write(MODE1, 0x00);
+                                        setFreq(50);
+                                    }*/
+                                    //return 69
+                                } else {
+                                    if (frq > 48) {
+                                        //basic.showString("F")
+                                        //ret_frq = 70
+                                        /*if (flag) {
+                                            i2c_write(MODE1, 0x00);
+                                            setFreq(50 * 1.02);
+                                        }*/
+                                        //return 70
+                                    } else {
+                                        if (frq <= 48) {
+                                            //basic.showString("X")
+                                            //ret_frq = 88
+                                            /*if (flag) {
+                                                i2c_write(MODE1, 0x00);
+                                                setFreq(50 );
+                                            }*/
+                                            //return 88
+
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+
+                frq = 0
+                timer = 0
+                break;
+            }
+        }
+        //return ret_frq
+        //return 88
         i2c_write(MODE1, 0x00);
         //setFreq(50);
         let prescaleval = 25000000 / 4096 / 50;
