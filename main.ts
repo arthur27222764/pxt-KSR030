@@ -103,43 +103,9 @@ namespace KSR030 {
 
         //detect_freq(ServoNum.S0, DigitalPin.P2, 1);
         //detect_freq(ServoNum.S0, DigitalPin.P2, 1);
-        let frq = 0;
-        let frqPinState = 0;
-        let prevFrqPinState = 0;
-        //let oneSecond = 1000;
-        let timer = 0;
-        //let ret_frq = 0;
-
-        setPwm(ServoNum.S0, 0, SERVOMAX);
-        for (let i = 0; i < 2000; i++) {
-            frqPinState = pins.digitalReadPin(DigitalPin.P2)
-            if (frqPinState == 0) {
-                prevFrqPinState = 0
-            }
-            if (frqPinState == 1 && prevFrqPinState == 0) {
-                prevFrqPinState = frqPinState
-                frq = frq + 1
-            }
-            control.waitMicros(1000)
-            timer = timer + 1
-            
-        }
-        //return ret_frq
-        //return 88
         i2c_write(MODE1, 0x00);
-        //setFreq(50);
-        let prescaleval = 25000000 / 4096 / 50;
-        prescaleval -= 1;
-        //let prescale = prescaleval;
-        //let prescale = 121;
-        //i2c_write(MODE1, 0x00);
-        //let oldmode = i2c_read(MODE1);
-        //let newmode = (i2c_read(MODE1) & 0x7F) | 0x10; // sleep
-        i2c_write(MODE1, (i2c_read(MODE1) & 0x7F) | 0x10); // go to sleep
-        i2c_write(PRESCALE, prescaleval); // set the prescaler
-        i2c_write(MODE1, i2c_read(MODE1));
-        control.waitMicros(5000);
-        i2c_write(MODE1, i2c_read(MODE1) | 0xa0);
+        setFreq(50);
+        
 
         initialized = true;
     }
@@ -255,7 +221,6 @@ namespace KSR030 {
         prescaleval -= 1;
         let prescale = prescaleval;
         //let prescale = 121;
-        //i2c_write(MODE1, 0x00);
         let oldmode = i2c_read(MODE1);
         let newmode = (oldmode & 0x7F) | 0x10; // sleep
         i2c_write(MODE1, newmode); // go to sleep
