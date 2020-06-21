@@ -107,16 +107,16 @@ namespace KSR030 {
         //setFreq(50);
         let prescaleval = 25000000 / 4096 / 50;
         prescaleval -= 1;
-        let prescale = prescaleval;
+        //let prescale = prescaleval;
         //let prescale = 121;
         //i2c_write(MODE1, 0x00);
-        let oldmode = i2c_read(MODE1);
-        let newmode = (oldmode & 0x7F) | 0x10; // sleep
-        i2c_write(MODE1, newmode); // go to sleep
-        i2c_write(PRESCALE, prescale); // set the prescaler
-        i2c_write(MODE1, oldmode);
+        //let oldmode = i2c_read(MODE1);
+        //let newmode = (i2c_read(MODE1) & 0x7F) | 0x10; // sleep
+        i2c_write(MODE1, (i2c_read(MODE1) & 0x7F) | 0x10); // go to sleep
+        i2c_write(PRESCALE, prescaleval); // set the prescaler
+        i2c_write(MODE1, i2c_read(MODE1));
         control.waitMicros(5000);
-        i2c_write(MODE1, oldmode | 0xa0);
+        i2c_write(MODE1, i2c_read(MODE1) | 0xa0);
 
         initialized = true;
     }
