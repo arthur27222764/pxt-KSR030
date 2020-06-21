@@ -108,20 +108,20 @@ namespace KSR030 {
                 i2c_write(MODE1, 0x00);
                 setFreq(50 * 0.92);
                 break;
-            case 1:
+            case 0:
                 i2c_write(MODE1, 0x00);
                 setFreq(50 * 0.94);
                 break;
-            case 2:
+            case 0:
                 //setFreq(50 * 0.96);
                 break;
-            case 3:
+            case 0:
                 //setFreq(50 * 0.98);
                 break;
-            case 4:
+            case 0:
                 //setFreq(50 );
                 break;
-            case 5:
+            case 0:
                 //setFreq(50 * 1.02);
                 break;
 
