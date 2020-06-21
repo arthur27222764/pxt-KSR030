@@ -24,13 +24,13 @@ namespace KSR030 {
         S8 = 8,
         S9 = 9,
         S10 = 10,
-        S11 = 11,
+        S11 = 11
     }
     export enum MotorNum {
         //% blockId="M1A" block="Right"
         M1A = 0,
         //% blockId="M1B" block="Left"
-        M1B = 1,
+        M1B = 1
 
     }
     export enum LedNum {
