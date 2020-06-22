@@ -102,8 +102,8 @@ namespace KSR030 {
         pins.setPull(DigitalPin.P12, PinPullMode.PullUp);
 
         servo_pwm(detect_freq(ServoNum.S0, DigitalPin.P2));
-       
-       
+
+
         initialized = true;
     }
 
@@ -175,43 +175,34 @@ namespace KSR030 {
 
 
     }
+    function i2c_setFreq(frqval: number): void {
+        i2c_write(MODE1, 0x00);
+        // Constrain the frequency
+        setFreq(frqval);
+    }
 
     function servo_pwm(frqval: number): void {
 
         if (frqval == FrqState.A) {
-            i2c_write(MODE1, 0x00);
-            // Constrain the frequency
-            setFreq(50 * 0.92);
+            i2c_setFreq(50 * 0.92);
 
         } else if (frqval == FrqState.B) {
-            i2c_write(MODE1, 0x00);
-            // Constrain the frequency
-            setFreq(50 * 0.94);
+            i2c_setFreq(50 * 0.94);
 
         } else if (frqval == FrqState.C) {
-            i2c_write(MODE1, 0x00);
-            // Constrain the frequency
-            setFreq(50 * 0.96);
+            i2c_setFreq(50 * 0.96);
 
         } else if (frqval == FrqState.D) {
-            i2c_write(MODE1, 0x00);
-            // Constrain the frequency
-            setFreq(50 * 0.98);
+            i2c_setFreq(50 * 0.98);
 
         } else if (frqval == FrqState.E) {
-            i2c_write(MODE1, 0x00);
-            // Constrain the frequency
-            setFreq(50 * 1);
+            i2c_setFreq(50 * 1);
 
         } else if (frqval == FrqState.F) {
-            i2c_write(MODE1, 0x00);
-            // Constrain the frequency
-            setFreq(50 * 1.02);
+            i2c_setFreq(50 * 1.02);
 
         } else {
-            i2c_write(MODE1, 0x00);
-            // Constrain the frequency
-            setFreq(50 );
+            i2c_setFreq(50);
 
         }
 
@@ -400,52 +391,36 @@ namespace KSR030 {
     //% weight=88
     //% lspeed.min=-90 lspeed.max=90 rspeed.min=-90 rspeed.max=90
     export function Servo_Car(index: RunState, lspeed: number, rspeed: number): void {
-        //let l_pulselen = 0;
-        //let r_pulselen = 0;
+
         if (!initialized) {
             init()
         }
 
         switch (index) {
             case RunState.Forward:
-                /*l_pulselen = servo_map(90 + lspeed, 0, 180, SERVOMIN, SERVOMAX);
-                r_pulselen = servo_map(90 - rspeed, 0, 180, SERVOMIN, SERVOMAX);
-                setPwm(ServoNum.S8, 0, l_pulselen);
-                setPwm(ServoNum.S9, 0, r_pulselen);*/
+
                 Servo(ServoNum.S8, 90 + lspeed);
                 Servo(ServoNum.S9, 90 - rspeed);
 
                 break;
             case RunState.Back:
-                /*l_pulselen = servo_map(90 - lspeed, 0, 180, SERVOMIN, SERVOMAX);
-                r_pulselen = servo_map(90 + rspeed, 0, 180, SERVOMIN, SERVOMAX);
-                setPwm(ServoNum.S8, 0, l_pulselen);
-                setPwm(ServoNum.S9, 0, r_pulselen);*/
+
                 Servo(ServoNum.S8, 90 - lspeed);
                 Servo(ServoNum.S9, 90 + rspeed);
 
                 break;
             case RunState.Left:
-                /*l_pulselen = servo_map(90 + lspeed, 0, 180, SERVOMIN, SERVOMAX);
-                r_pulselen = servo_map(90 - rspeed, 0, 180, SERVOMIN, SERVOMAX);
-                setPwm(ServoNum.S8, 0, l_pulselen);
-                setPwm(ServoNum.S9, 0, r_pulselen);*/
+
                 Servo(ServoNum.S8, 90 + lspeed);
                 Servo(ServoNum.S9, 90 - rspeed);
                 break;
             case RunState.Right:
-                /*l_pulselen = servo_map(90 + lspeed, 0, 180, SERVOMIN, SERVOMAX);
-                r_pulselen = servo_map(90 - rspeed, 0, 180, SERVOMIN, SERVOMAX);
-                setPwm(ServoNum.S8, 0, l_pulselen);
-                setPwm(ServoNum.S9, 0, r_pulselen);*/
+
                 Servo(ServoNum.S8, 90 + lspeed);
                 Servo(ServoNum.S9, 90 - rspeed);
                 break;
             case RunState.Stop:
-                /*l_pulselen = servo_map(90, 0, 180, SERVOMIN, SERVOMAX);
-                r_pulselen = servo_map(90, 0, 180, SERVOMIN, SERVOMAX);
-                setPwm(ServoNum.S8, 0, l_pulselen);
-                setPwm(ServoNum.S9, 0, r_pulselen);*/
+
                 Servo(ServoNum.S8, 90);
                 Servo(ServoNum.S9, 90);
                 break;
