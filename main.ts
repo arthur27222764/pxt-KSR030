@@ -400,42 +400,54 @@ namespace KSR030 {
     //% weight=88
     //% lspeed.min=-90 lspeed.max=90 rspeed.min=-90 rspeed.max=90
     export function Servo_Car(index: RunState, lspeed: number, rspeed: number): void {
-        let l_pulselen = 0;
-        let r_pulselen = 0;
+        //let l_pulselen = 0;
+        //let r_pulselen = 0;
         if (!initialized) {
             init()
         }
 
         switch (index) {
             case RunState.Forward:
-                l_pulselen = servo_map(90 + lspeed, 0, 180, SERVOMIN, SERVOMAX);
+                /*l_pulselen = servo_map(90 + lspeed, 0, 180, SERVOMIN, SERVOMAX);
                 r_pulselen = servo_map(90 - rspeed, 0, 180, SERVOMIN, SERVOMAX);
                 setPwm(ServoNum.S8, 0, l_pulselen);
-                setPwm(ServoNum.S9, 0, r_pulselen);
+                setPwm(ServoNum.S9, 0, r_pulselen);*/
+                Servo(ServoNum.S8, 90 + lspeed);
+                Servo(ServoNum.S9, 90 - rspeed);
+
                 break;
             case RunState.Back:
-                l_pulselen = servo_map(90 - lspeed, 0, 180, SERVOMIN, SERVOMAX);
+                /*l_pulselen = servo_map(90 - lspeed, 0, 180, SERVOMIN, SERVOMAX);
                 r_pulselen = servo_map(90 + rspeed, 0, 180, SERVOMIN, SERVOMAX);
                 setPwm(ServoNum.S8, 0, l_pulselen);
-                setPwm(ServoNum.S9, 0, r_pulselen);
+                setPwm(ServoNum.S9, 0, r_pulselen);*/
+                Servo(ServoNum.S8, 90 - lspeed);
+                Servo(ServoNum.S9, 90 + rspeed);
+
                 break;
             case RunState.Left:
-                l_pulselen = servo_map(90 + lspeed, 0, 180, SERVOMIN, SERVOMAX);
+                /*l_pulselen = servo_map(90 + lspeed, 0, 180, SERVOMIN, SERVOMAX);
                 r_pulselen = servo_map(90 - rspeed, 0, 180, SERVOMIN, SERVOMAX);
                 setPwm(ServoNum.S8, 0, l_pulselen);
-                setPwm(ServoNum.S9, 0, r_pulselen);
+                setPwm(ServoNum.S9, 0, r_pulselen);*/
+                Servo(ServoNum.S8, 90 + lspeed);
+                Servo(ServoNum.S9, 90 - rspeed);
                 break;
             case RunState.Right:
-                l_pulselen = servo_map(90 + lspeed, 0, 180, SERVOMIN, SERVOMAX);
+                /*l_pulselen = servo_map(90 + lspeed, 0, 180, SERVOMIN, SERVOMAX);
                 r_pulselen = servo_map(90 - rspeed, 0, 180, SERVOMIN, SERVOMAX);
                 setPwm(ServoNum.S8, 0, l_pulselen);
-                setPwm(ServoNum.S9, 0, r_pulselen);
+                setPwm(ServoNum.S9, 0, r_pulselen);*/
+                Servo(ServoNum.S8, 90 + lspeed);
+                Servo(ServoNum.S9, 90 - rspeed);
                 break;
             case RunState.Stop:
-                l_pulselen = servo_map(90, 0, 180, SERVOMIN, SERVOMAX);
+                /*l_pulselen = servo_map(90, 0, 180, SERVOMIN, SERVOMAX);
                 r_pulselen = servo_map(90, 0, 180, SERVOMIN, SERVOMAX);
                 setPwm(ServoNum.S8, 0, l_pulselen);
-                setPwm(ServoNum.S9, 0, r_pulselen);
+                setPwm(ServoNum.S9, 0, r_pulselen);*/
+                Servo(ServoNum.S8, 90);
+                Servo(ServoNum.S9, 90);
                 break;
 
         }
