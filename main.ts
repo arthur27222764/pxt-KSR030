@@ -129,8 +129,10 @@ namespace KSR030 {
             control.waitMicros(1000)
             timer = timer + 1
             if (timer > oneSecond) {
+                return frq
+
                 frq = frq - 2
-                if (frq > 53) {
+                /*if (frq > 53) {
                     //basic.showString("A")
                     ret_frq = 65
                 } else {
@@ -165,7 +167,7 @@ namespace KSR030 {
                             }
                         }
                     }
-                }
+                }*/
 
                 frq = 0
                 timer = 0
