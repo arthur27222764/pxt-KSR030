@@ -130,32 +130,32 @@ namespace KSR030 {
             if (timer > oneSecond) {
                 frq = frq - 2
                 if (frq > 53) {
-                    //basic.showString("A")
-                    ret_frq = 65
+                   
+                    ret_frq = 65 //A
                 } else {
                     if (frq > 52) {
-                        //basic.showString("B")
-                        ret_frq = 66
+                        
+                        ret_frq = 66 //B
                     } else {
                         if (frq > 51) {
-                            //basic.showString("C")
-                            ret_frq = 67
+                            
+                            ret_frq = 67 //C
                         } else {
                             if (frq > 50) {
-                                //basic.showString("D")
-                                ret_frq = 68
+                                
+                                ret_frq = 68 //D
                             } else {
                                 if (frq > 49) {
-                                    //basic.showString("E")
-                                    ret_frq = 69
+                                    
+                                    ret_frq = 69 //E
                                 } else {
                                     if (frq > 48) {
-                                        //basic.showString("F")
-                                        ret_frq = 70
+                                        
+                                        ret_frq = 70 //F
                                     } else {
                                         if (frq <= 48) {
-                                            //basic.showString("X")
-                                            ret_frq = 88
+                                            
+                                            ret_frq = 88 //X
 
                                         }
                                     }
@@ -173,8 +173,8 @@ namespace KSR030 {
         }
         return ret_frq
 
-
     }
+
     function i2c_setFreq(frqval: number): void {
         i2c_write(MODE1, 0x00);
         // Constrain the frequency
@@ -185,27 +185,19 @@ namespace KSR030 {
 
         if (frqval == FrqState.A) {
             i2c_setFreq(50 * 0.92);
-
         } else if (frqval == FrqState.B) {
             i2c_setFreq(50 * 0.94);
-
         } else if (frqval == FrqState.C) {
             i2c_setFreq(50 * 0.96);
-
         } else if (frqval == FrqState.D) {
             i2c_setFreq(50 * 0.98);
-
         } else if (frqval == FrqState.E) {
             i2c_setFreq(50 * 1);
-
         } else if (frqval == FrqState.F) {
             i2c_setFreq(50 * 1.02);
-
         } else {
             i2c_setFreq(50);
-
         }
-
     }
 
     function setFreq(freq: number): void {
