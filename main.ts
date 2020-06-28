@@ -101,7 +101,7 @@ namespace KSR030 {
         pins.setPull(DigitalPin.P8, PinPullMode.PullUp);
         pins.setPull(DigitalPin.P12, PinPullMode.PullUp);
 
-        servo_pwm(detect_freq(ServoNum.S0, DigitalPin.P2));
+        //servo_pwm(detect_freq(ServoNum.S0, DigitalPin.P2));
 
 
         initialized = true;
@@ -115,7 +115,8 @@ namespace KSR030 {
         let timer = 0;
         let ret_frq = 0;
 
-        setPwm(channel, 0, SERVOMAX);
+        //setPwm(channel, 0, SERVOMAX);
+        setPwm(channel, 0, 307);
         for (let i = 0; i < 2000; i++) {
             frqPinState = pins.digitalReadPin(iopin)
             if (frqPinState == 0) {
