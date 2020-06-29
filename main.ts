@@ -10,7 +10,7 @@ namespace KSR030 {
     const MODE1 = 0x00
     const PRESCALE = 0xFE
     const LED0_ON_L = 0x06
-    const MODE1_RESTART 0x80
+    const MODE1_RESTART = 0x80
 
 
     export enum ServoNum {
