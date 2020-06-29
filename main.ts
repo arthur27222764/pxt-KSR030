@@ -101,7 +101,10 @@ namespace KSR030 {
         pins.setPull(DigitalPin.P8, PinPullMode.PullUp);
         pins.setPull(DigitalPin.P12, PinPullMode.PullUp);
         i2c_setFreq(50);
-        servo_pwm(detect_freq(ServoNum.S0, DigitalPin.P2));
+        control.waitMicros(30000)
+        i2c_setFreq(50);
+        control.waitMicros(30000)
+        //servo_pwm(detect_freq(ServoNum.S0, DigitalPin.P2));
 
 
         initialized = true;
