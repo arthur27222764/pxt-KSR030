@@ -116,8 +116,6 @@ namespace KSR030 {
         let ret_frq = 0;
 
         setPwm(channel, 0, SERVOMAX);
-        
-        
         for (let i = 0; i < 2000; i++) {
             frqPinState = pins.digitalReadPin(iopin)
             if (frqPinState == 0) {
@@ -130,11 +128,7 @@ namespace KSR030 {
             control.waitMicros(1000)
             timer = timer + 1
             if (timer > oneSecond) {
-            
-                
-                
                 frq = frq - 2
-               
                 if (frq > 53) {
                    
                     ret_frq = 65 //A
