@@ -115,7 +115,8 @@ namespace KSR030 {
         let timer = 0;
         let ret_frq = 0;
 
-        setPwm(channel, 0, SERVOMAX);
+        //setPwm(channel, 0, SERVOMAX);
+        setPwm(channel, 0, 307);
         
         for (let i = 0; i < 2000; i++) {
             frqPinState = pins.digitalReadPin(iopin)
