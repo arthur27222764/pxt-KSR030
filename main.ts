@@ -101,7 +101,7 @@ namespace KSR030 {
         pins.setPull(DigitalPin.P8, PinPullMode.PullUp);
         pins.setPull(DigitalPin.P12, PinPullMode.PullUp);
         
-        servo_pwm(detect_freq(ServoNum.S0, DigitalPin.P2));
+        //servo_pwm(detect_freq(ServoNum.S0, DigitalPin.P2));
         servo_pwm(detect_freq(ServoNum.S0, DigitalPin.P2));
 
 
