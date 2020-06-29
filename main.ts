@@ -10,6 +10,7 @@ namespace KSR030 {
     const MODE1 = 0x00
     const PRESCALE = 0xFE
     const LED0_ON_L = 0x06
+    const MODE1_RESTART 0x80
 
 
     export enum ServoNum {
@@ -102,6 +103,8 @@ namespace KSR030 {
         pins.setPull(DigitalPin.P12, PinPullMode.PullUp);
         
         //servo_pwm(detect_freq(ServoNum.S0, DigitalPin.P2));
+        i2c_write(MODE1, MODE1_RESTART);
+        control.waitMicros(1000)
         servo_pwm(detect_freq(ServoNum.S0, DigitalPin.P2));
 
 
