@@ -130,6 +130,7 @@ namespace KSR030 {
             timer = timer + 1
             if (timer > oneSecond) {
                 
+                
                 frq = frq - 2
                
                 if (frq > 53) {
