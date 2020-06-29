@@ -100,7 +100,7 @@ namespace KSR030 {
     function init(): void {
         pins.setPull(DigitalPin.P8, PinPullMode.PullUp);
         pins.setPull(DigitalPin.P12, PinPullMode.PullUp);
-
+        i2c_setFreq(50);
         servo_pwm(detect_freq(ServoNum.S0, DigitalPin.P2));
 
 
