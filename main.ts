@@ -467,7 +467,7 @@ namespace KSR030 {
 
         i2c_write(MODE1, MODE1_RESTART);
         control.waitMicros(10000)
-                
+        i2c_setFreq(50);        
 
         return detect_freq(channel, iopin);
 
