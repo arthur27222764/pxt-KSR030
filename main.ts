@@ -102,6 +102,7 @@ namespace KSR030 {
         pins.setPull(DigitalPin.P8, PinPullMode.PullUp);
         pins.setPull(DigitalPin.P12, PinPullMode.PullUp);
         
+        i2c_write(MODE1, MODE1_RESTART);
         servo_pwm(detect_freq(ServoNum.S0, DigitalPin.P2));
         
         initialized = true;
