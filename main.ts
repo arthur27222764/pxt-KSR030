@@ -102,14 +102,8 @@ namespace KSR030 {
         pins.setPull(DigitalPin.P8, PinPullMode.PullUp);
         pins.setPull(DigitalPin.P12, PinPullMode.PullUp);
         
-        //servo_pwm(detect_freq(ServoNum.S0, DigitalPin.P2));
-        i2c_write(MODE1, MODE1_RESTART);
-        control.waitMicros(1000)
-        i2c_setFreq(50);
-        //servo_pwm(detect_freq(ServoNum.S0, DigitalPin.P2));
-        //servo_pwm(detect_freq(ServoNum.S0, DigitalPin.P2));
-
-
+        servo_pwm(detect_freq(ServoNum.S0, DigitalPin.P2));
+        
         initialized = true;
     }
 
@@ -462,14 +456,11 @@ namespace KSR030 {
     export function DETECT_Frequency(channel: ServoNum, iopin: DigitalPin): number {
 
 
-        //if(!initialized) {
-         //  init()
-        //}
+        if(!initialized) {
+           init()
+        }
 
-        i2c_write(MODE1, MODE1_RESTART);
-        control.waitMicros(10000)
-        i2c_write(MODE1, 0x00);  
-
+        
         return detect_freq(channel, iopin);
 
 
