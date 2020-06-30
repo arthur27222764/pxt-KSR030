@@ -460,12 +460,12 @@ namespace KSR030 {
     export function DETECT_Frequency(channel: ServoNum, iopin: DigitalPin): number {
 
 
-        if (!initialized) {
-            init()
-        }
-        i2c_write(MODE1, MODE1_RESTART);
-        control.waitMicros(1000)
-        servo_pwm(detect_freq(ServoNum.S0, DigitalPin.P2));
+        //if (!initialized) {
+        //    init()
+        //}
+        
+        init()
+        
 
         return detect_freq(channel, iopin);
 
