@@ -461,10 +461,12 @@ namespace KSR030 {
     export function DETECT_Frequency(channel: ServoNum, iopin: DigitalPin): number {
 
 
-        if(!initialized) {
-           init()
-        }
-        
+        //if(!initialized) {
+         //  init()
+        //}
+
+        i2c_write(MODE1, MODE1_RESTART);
+        control.waitMicros(10000)
                 
 
         return detect_freq(channel, iopin);
