@@ -105,6 +105,7 @@ namespace KSR030 {
         //servo_pwm(detect_freq(ServoNum.S0, DigitalPin.P2));
         i2c_write(MODE1, MODE1_RESTART);
         control.waitMicros(1000)
+        i2c_write(MODE1, 0x00);
         //servo_pwm(detect_freq(ServoNum.S0, DigitalPin.P2));
         //servo_pwm(detect_freq(ServoNum.S0, DigitalPin.P2));
 
@@ -467,7 +468,7 @@ namespace KSR030 {
 
         i2c_write(MODE1, MODE1_RESTART);
         control.waitMicros(10000)
-        i2c_setFreq(50);        
+        i2c_write(MODE1, 0x00);  
 
         return detect_freq(channel, iopin);
 
