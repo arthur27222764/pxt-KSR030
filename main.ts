@@ -102,7 +102,9 @@ namespace KSR030 {
         pins.setPull(DigitalPin.P8, PinPullMode.PullUp);
         pins.setPull(DigitalPin.P12, PinPullMode.PullUp);
         
-        i2c_write(MODE1, MODE1_RESTART);
+        //i2c_write(MODE1, MODE1_RESTART);
+        i2c_setFreq(50);
+        control.waitMicros(1000)
         servo_pwm(detect_freq(ServoNum.S0, DigitalPin.P2));
         
         initialized = true;
@@ -177,7 +179,8 @@ namespace KSR030 {
     }
 
     function i2c_setFreq(frqval: number): void {
-        i2c_write(MODE1, 0x00);
+        //i2c_write(MODE1, 0x00);
+        i2c_write(MODE1, MODE1_RESTART);
         // Constrain the frequency
         setFreq(frqval);
     }
