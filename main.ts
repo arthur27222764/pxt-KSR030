@@ -82,6 +82,7 @@ namespace KSR030 {
 
     let initialized = false;
     let neoStrip: neopixel.Strip;
+    let pwm_frq = 0; 
 
     function i2c_write(reg: number, value: number) {
 
@@ -102,10 +103,10 @@ namespace KSR030 {
         pins.setPull(DigitalPin.P8, PinPullMode.PullUp);
         pins.setPull(DigitalPin.P12, PinPullMode.PullUp);
         
-        //i2c_write(MODE1, MODE1_RESTART);
-        i2c_setFreq(50 * 0.96);
-        control.waitMicros(1000)
-        servo_pwm(detect_freq(ServoNum.S0, DigitalPin.P2));
+        
+        i2c_setFreq(50);
+        pwm_frq=detect_freq(ServoNum.S0, DigitalPin.P2)
+        servo_pwm(pwm_frq);
         
         initialized = true;
     }
@@ -174,6 +175,7 @@ namespace KSR030 {
                 break;
             }
         }
+        
         return ret_frq
 
     }
@@ -252,7 +254,8 @@ namespace KSR030 {
         if (!initialized) {
             init()
         }
-        servo_pwm(frqval);
+        pwm_frq=frqval
+        servo_pwm(pwm_frq);
 
 
     }
@@ -458,13 +461,16 @@ namespace KSR030 {
     //% weight=80
     export function DETECT_Frequency(channel: ServoNum, iopin: DigitalPin): number {
 
-
+        let temp=0;
         if(!initialized) {
            init()
         }
 
+        i2c_setFreq(50);
+        temp= detect_freq(channel, iopin);
+        servo_pwm(pwm_frq);
         
-        return detect_freq(channel, iopin);
+        return temp;
 
 
     }
