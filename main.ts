@@ -82,7 +82,7 @@ namespace KSR030 {
 
     let initialized = false;
     let neoStrip: neopixel.Strip;
-    let pwm_frq = 0; 
+    let pwm_frq = 69; 
 
     function i2c_write(reg: number, value: number) {
 
@@ -105,6 +105,7 @@ namespace KSR030 {
         
         
         i2c_setFreq(50);
+        pwm_frq=detect_freq(ServoNum.S0, DigitalPin.P2)
         pwm_frq=detect_freq(ServoNum.S0, DigitalPin.P2)
         servo_pwm(pwm_frq);
         
