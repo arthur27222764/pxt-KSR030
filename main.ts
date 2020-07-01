@@ -179,8 +179,7 @@ namespace KSR030 {
     }
 
     function i2c_setFreq(frqval: number): void {
-        //i2c_write(MODE1, 0x00);
-        i2c_write(MODE1, MODE1_RESTART);
+        i2c_write(MODE1, 0x00);
         // Constrain the frequency
         setFreq(frqval);
     }
