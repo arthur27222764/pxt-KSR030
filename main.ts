@@ -105,8 +105,9 @@ namespace KSR030 {
         
         
         i2c_setFreq(50);
+        control.waitMicros(10000)
         pwm_frq=detect_freq(ServoNum.S0, DigitalPin.P2)
-        pwm_frq=detect_freq(ServoNum.S0, DigitalPin.P2)
+        control.waitMicros(10000)
         servo_pwm(pwm_frq);
         
         initialized = true;
@@ -468,7 +469,9 @@ namespace KSR030 {
         }
 
         i2c_setFreq(50);
+        control.waitMicros(10000)
         temp= detect_freq(channel, iopin);
+        control.waitMicros(10000)
         servo_pwm(pwm_frq);
         
         return temp;
