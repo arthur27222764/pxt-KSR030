@@ -113,6 +113,7 @@ namespace KSR030 {
         initialized = true;
     }
 
+    
     function detect_freq(channel: ServoNum, iopin: DigitalPin): number {
         let frq = 0;
         let frqPinState = 0;
