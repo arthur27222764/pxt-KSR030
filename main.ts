@@ -10,7 +10,7 @@ namespace KSR030 {
     const MODE1 = 0x00
     const PRESCALE = 0xFE
     const LED0_ON_L = 0x06
-
+    
 
 
     export enum ServoNum {
@@ -78,9 +78,11 @@ namespace KSR030 {
     }
 
 
+
+
     let initialized = false;
     let neoStrip: neopixel.Strip;
-    let pwm_frq = 69;
+    let pwm_frq = 69; 
 
     function i2c_write(reg: number, value: number) {
 
@@ -100,17 +102,16 @@ namespace KSR030 {
     function init(): void {
         pins.setPull(DigitalPin.P8, PinPullMode.PullUp);
         pins.setPull(DigitalPin.P12, PinPullMode.PullUp);
-
-
+        
+        
         i2c_setFreq(50);
-
-        pwm_frq = detect_freq(ServoNum.S0, DigitalPin.P2)
-
+       
+        pwm_frq=detect_freq(ServoNum.S0, DigitalPin.P2)
+        
         servo_pwm(pwm_frq);
-
+        
         initialized = true;
     }
-
 
     function detect_freq(channel: ServoNum, iopin: DigitalPin): number {
         let frq = 0;
@@ -135,31 +136,31 @@ namespace KSR030 {
             if (timer > oneSecond) {
                 frq = frq - 2
                 if (frq > 53) {
-
+                   
                     ret_frq = 65 //A
                 } else {
                     if (frq > 52) {
-
+                        
                         ret_frq = 66 //B
                     } else {
                         if (frq > 51) {
-
+                            
                             ret_frq = 67 //C
                         } else {
                             if (frq > 50) {
-
+                                
                                 ret_frq = 68 //D
                             } else {
                                 if (frq > 49) {
-
+                                    
                                     ret_frq = 69 //E
                                 } else {
                                     if (frq > 48) {
-
+                                        
                                         ret_frq = 70 //F
                                     } else {
                                         if (frq <= 48) {
-
+                                            
                                             ret_frq = 88 //X
 
                                         }
@@ -176,7 +177,7 @@ namespace KSR030 {
                 break;
             }
         }
-
+        
         return ret_frq
 
     }
@@ -255,7 +256,7 @@ namespace KSR030 {
         if (!initialized) {
             init()
         }
-        pwm_frq = frqval
+        pwm_frq=frqval
         servo_pwm(pwm_frq);
 
 
@@ -336,7 +337,7 @@ namespace KSR030 {
 
     }
 
-    /**
+	/**
      * Used to move the given servo to the specified degrees (0-180) connected to the KSR030
      * @param channel The number (1-16) of the servo to move
      * @param degrees The degrees (0-180) to move the servo to
@@ -462,17 +463,17 @@ namespace KSR030 {
     //% weight=80
     export function DETECT_Frequency(channel: ServoNum, iopin: DigitalPin): number {
 
-        let temp = 0;
-        if (!initialized) {
-            init()
+        let temp=0;
+        if(!initialized) {
+           init()
         }
 
         i2c_setFreq(50);
-
-        temp = detect_freq(channel, iopin);
-
+        
+        temp= detect_freq(channel, iopin);
+        
         servo_pwm(pwm_frq);
-
+        
         return temp;
 
 
