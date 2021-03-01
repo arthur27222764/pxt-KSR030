@@ -194,7 +194,10 @@ namespace KSR030 {
             }
         }
         else {
-            ret_frq = 99
+            Servo(channel, 90)
+            for (let i = 0; i < 5; i++) {
+                ret_frq = pins.pulseIn(iopin, PulseValue.High, 3000)
+                
         }
 
         return ret_frq
