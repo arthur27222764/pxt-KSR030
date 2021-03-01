@@ -194,7 +194,7 @@ namespace KSR030 {
             }
         }
         else {
-            Servo(channel, 90)
+            setPwm(channel, 0, SERVOMAX);
            
                 ret_frq = pins.pulseIn(iopin, PulseValue.High, 3000)
                 
