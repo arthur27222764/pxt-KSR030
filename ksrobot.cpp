@@ -9,6 +9,6 @@ namespace KSRobotCPP {
 #endif
         return 1;
 
-        return 1;
+        
     }
 }
