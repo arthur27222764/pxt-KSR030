@@ -195,7 +195,7 @@ namespace KSR030 {
         }
         else {
 
-            let pulselen = servo_map(90, 0, 180, servomin, servomax);
+            let pulselen = servo_map(90, 0, 180, SERVOMIN, SERVOMAX);
             setPwm(channel, 0, pulselen);
 
             ret_frq = pins.pulseIn(iopin, PulseValue.High, 3000)
