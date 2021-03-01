@@ -8,5 +8,7 @@ namespace KSRobotCPP {
         return 0;
 #endif
         return 1;
+
+        return 1;
     }
 }
