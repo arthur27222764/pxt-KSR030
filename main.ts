@@ -537,7 +537,7 @@ namespace KSR030 {
         if (KSRobotCPP.mb_version())
             temp = detect_freq(channel, iopin, 1);
         else
-            temp = detect_freq1(channel, iopin, 0);
+            temp = detect_freq(channel, iopin, 0);
 
 
         servo_pwm(pwm_frq);
