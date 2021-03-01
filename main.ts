@@ -2,11 +2,6 @@
  * KSR030 V0.010
  */
 
-declare namespace KSRobotCPP {
-    //% shim=KSRobotCPP::mb_version
-    export function mb_version(): int32;
-
-}
 
 
 

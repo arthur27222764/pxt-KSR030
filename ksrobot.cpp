@@ -1,9 +1,5 @@
 #include "pxt.h"
 
-
-namespace KSRobotCPP
-{
-
     //%
     int mb_version()
     {
@@ -12,5 +8,3 @@ namespace KSRobotCPP
 #endif
         return 1;
     }
-
-} // namespace KSRobotCPP
