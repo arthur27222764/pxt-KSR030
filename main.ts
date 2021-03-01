@@ -194,47 +194,7 @@ namespace KSR030 {
             }
         }
         else {
-            Servo(channel, 90)
-            for (let i = 0; i < 5; i++) {
-                frq = pins.pulseIn(iopin, PulseValue.High, 3000)
-                if (frq > 1580 && frq==0) {
-                    ret_frq = 88 //X
-                } else {
-                    if (frq > 1530) {
-
-                        ret_frq = 70 //F
-                    } else {
-                        if (frq > 1495) {
-
-                            ret_frq = 69 //E
-                        } else {
-                            if (frq > 1470) {
-
-                                ret_frq = 68 //D
-                            } else {
-                                if (frq > 1445) {
-
-                                    ret_frq = 67 //C
-                                } else {
-                                    if (frq > 1420) {
-
-                                        ret_frq = 66 //B
-                                    } else {
-                                        if (frq <= 1410) {
-
-                                            ret_frq = 65 //A
-
-                                        }
-                                    }
-
-                                }
-                            }
-                        }
-                    }
-                }
-                if (frq != 0 && frq < 1580)
-                    break
-            }
+            ret_frq = 99
         }
 
         return ret_frq
