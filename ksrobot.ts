@@ -1,5 +1,5 @@
-namespace KSRobotCPP {
-    //% shim=mb_version
-    export function mb_version(): int32;
+declare namespace KSRobotCPP {
+    //% shim=KSRobotCPP::mb_version
+    function mb_version(): int32;
 
 }
