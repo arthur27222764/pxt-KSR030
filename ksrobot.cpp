@@ -6,10 +6,14 @@ namespace KSRobotCPP
     //%
     int mb_version()
     {
+        int v = 0;
+
 #if MICROBIT_CODAL
-        return 0;
+        v = 0;
 #endif
-        return 1;
+        v = 1;
+
+        return v;
     }
 
 } // namespace KSRobotCPP
