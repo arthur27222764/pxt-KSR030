@@ -4,8 +4,7 @@
     "description": "Extension for KAISE KSRobot KSR030 Robot",
     "license": "MIT",
     "dependencies": {
-        "core": "*",
-        "neopixel": "github:microsoft/pxt-neopixel"
+        "core": "*"
     },
     "files": [
         "main.ts",
