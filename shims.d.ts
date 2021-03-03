@@ -1,9 +1,6 @@
-namespace KSRobotCPP {
+declare namespace KSRobotCPP {
     // %shim=KSRobotCPP::mb_version
-    export function mb_version()
-    {
-        // Fake function for simulator
-        return 0
-    }
-
+    mb_version(): number;
+    ...
+    
 }

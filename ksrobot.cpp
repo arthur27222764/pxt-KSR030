@@ -3,7 +3,7 @@ using namespace pxt;
 
 namespace KSRobotCPP {
     //%
-    uint16_t mb_version()
+    int mb_version()
     {
         
 #if MICROBIT_CODAL
