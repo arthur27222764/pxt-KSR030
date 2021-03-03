@@ -92,6 +92,7 @@ namespace KSR030 {
     let initialized = false;
     let neoStrip: neopixel.Strip;
     let pwm_frq = 69;
+    let ks_version = 0;
 
     function i2c_write(reg: number, value: number) {
 
@@ -115,26 +116,26 @@ namespace KSR030 {
 
         i2c_setFreq(50);
 
-        pwm_frq = detect_freq(ServoNum.S0, DigitalPin.P2)
+        if (KSRobotCPP.mb_version())
+            ks_version = 1
+        else
+            ks_version = 0
+
+        pwm_frq = detect_freq(ServoNum.S0, DigitalPin.P2, ks_version)
 
         servo_pwm(pwm_frq);
 
         initialized = true;
     }
 
-    function detect_freq(channel: ServoNum, iopin: DigitalPin): number {
+    function detect_freq(channel: ServoNum, iopin: DigitalPin, version: number): number {
         let frq = 0;
         let frqPinState = 0;
         let prevFrqPinState = 0;
         let oneSecond = 1000;
         let timer = 0;
         let ret_frq = 0;
-        let version = 0;
 
-        if (KSRobotCPP.mb_version())
-            version = 1
-        else
-            version = 0
 
         if (version) {
             setPwm(channel, 0, SERVOMAX);
@@ -541,11 +542,8 @@ namespace KSR030 {
         }
 
         i2c_setFreq(50);
-
-
-        temp = detect_freq(channel, iopin);
-
-
+ 
+        temp = detect_freq(channel, iopin, ks_version);
         servo_pwm(pwm_frq);
 
         return temp;
