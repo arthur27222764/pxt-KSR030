@@ -2,12 +2,10 @@
  * KSR030 V0.010
  */
 
-/*declare namespace KSRobotCPP {
-    //% block="create ANumber"
-    //% shim=KSRobotCPP::mb_version
-    function mb_version(): number;
+declare namespace KSRobotCPP {
+    
 
-}*/
+}
 
 //% advanced=true shim=KSRobotCPP::mb_version
 function mb_version(): number {
