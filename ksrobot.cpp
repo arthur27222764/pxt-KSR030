@@ -1,8 +1,9 @@
 #include "pxt.h"
+using namespace pxt;
 
 namespace KSRobotCPP {
     //%
-    int mb_version(void)
+    uint16_t mb_version()
     {
         
 #if MICROBIT_CODAL
