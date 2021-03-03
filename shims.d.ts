@@ -5,6 +5,9 @@ declare namespace kspins{
     //% advanced=true
     //% blockId=kspins_pulse_duration block="pulse duration (µs)"
     //% weight=21 blockGap=8 shim=kspins::pulseDuration
-    function pulseDuration(): int32;
+    function pulseDuration()
+    {
+        return 0
+    }
  
 }
