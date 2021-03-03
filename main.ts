@@ -115,24 +115,26 @@ namespace KSR030 {
 
         i2c_setFreq(50);
 
-        if (KSRobotCPP.mb_version())
-            pwm_frq = detect_freq(ServoNum.S0, DigitalPin.P2, 1)
-        else
-            pwm_frq = detect_freq(ServoNum.S0, DigitalPin.P2, 0)
+        pwm_frq = detect_freq(ServoNum.S0, DigitalPin.P2)
 
         servo_pwm(pwm_frq);
 
         initialized = true;
     }
 
-    function detect_freq(channel: ServoNum, iopin: DigitalPin, version: number): number {
+    function detect_freq(channel: ServoNum, iopin: DigitalPin): number {
         let frq = 0;
         let frqPinState = 0;
         let prevFrqPinState = 0;
         let oneSecond = 1000;
         let timer = 0;
         let ret_frq = 0;
+        let version = 0;
 
+        if (KSRobotCPP.mb_version())
+            version = 1
+        else
+            version = 0
 
         if (version) {
             setPwm(channel, 0, SERVOMAX);
@@ -540,10 +542,8 @@ namespace KSR030 {
 
         i2c_setFreq(50);
 
-        if (KSRobotCPP.mb_version())
-            temp = detect_freq(channel, iopin, 1);
-        else
-            temp = detect_freq(channel, iopin, 0);
+
+        temp = detect_freq(channel, iopin);
 
 
         servo_pwm(pwm_frq);
