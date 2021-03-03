@@ -9,7 +9,6 @@
     },
     "files": [
         "main.ts",
-        "shims.d.ts",
         "ksrobot.cpp",
         "README.md",
         "_locales/zh/KSR030-strings.json"
