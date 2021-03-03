@@ -111,7 +111,7 @@ namespace KSR030 {
 
         i2c_setFreq(50);
 
-        if (KSRobotCPP.mb_version())
+        if (kspins.pulseDuration())
             pwm_frq = detect_freq(ServoNum.S0, DigitalPin.P2, 1)
         else
             pwm_frq = detect_freq(ServoNum.S0, DigitalPin.P2, 0)
@@ -536,7 +536,7 @@ namespace KSR030 {
 
         i2c_setFreq(50);
 
-        if (KSRobotCPP.mb_version())
+        if (kspins.pulseDuration())
             temp = detect_freq(channel, iopin, 1);
         else
             temp = detect_freq(channel, iopin, 0);

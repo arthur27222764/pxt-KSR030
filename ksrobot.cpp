@@ -9,7 +9,7 @@ namespace kspins{
     //% blockId=kspins_pulse_duration block="pulse duration (µs)"
     //% weight=21 blockGap=8
     int pulseDuration() {
-        return pxt::lastEvent.timestamp;
+        return 1;
     }
 
     }
