@@ -1,16 +1,15 @@
 #include "pxt.h"
 using namespace pxt;
+namespace KSRobotCPP
+{
 
-namespace kspins{
-    / /**
-    * Get the duration of the last pulse in microseconds. This function should be called from a ``onPulsed`` handler.
-    */
-    //% advanced=true
-    //% blockId=kspins_pulse_duration block="pulse duration (µs)"
-    //% weight=21 blockGap=8
-    int pulseDuration() {
+    //%
+    int mb_version()
+    {
+#if MICROBIT_CODAL
+        return 0;
+#endif
         return 1;
     }
 
-    }
-}
+} // namespace KSRobotCPP

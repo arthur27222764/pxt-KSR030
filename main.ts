@@ -2,6 +2,12 @@
  * KSR030 V0.010
  */
 
+declare namespace KSRobotCPP {
+    //% shim=KSRobotCPP::mb_version
+    function mb_version(): int32;
+
+}
+
 
 
 //% weight=10 color=#00A6F0 icon="\uf085" block="KSR030"
@@ -84,7 +90,7 @@ namespace KSR030 {
 
 
     let initialized = false;
-    //let neoStrip: neopixel.Strip;
+    let neoStrip: neopixel.Strip;
     let pwm_frq = 69;
 
     function i2c_write(reg: number, value: number) {
@@ -109,7 +115,7 @@ namespace KSR030 {
 
         i2c_setFreq(50);
 
-        if (kspins.pulseDuration())
+        if (KSRobotCPP.mb_version())
             pwm_frq = detect_freq(ServoNum.S0, DigitalPin.P2, 1)
         else
             pwm_frq = detect_freq(ServoNum.S0, DigitalPin.P2, 0)
@@ -362,7 +368,7 @@ namespace KSR030 {
             return -1
         }
     }
-/*
+
     //% blockId="KSR030_RGB" 
     //% block="RGB LED "
     //% weight=96
@@ -374,7 +380,7 @@ namespace KSR030 {
 
         return neoStrip;
     }
-*/
+
     /**
      * Used to move the given servo to the specified degrees (0-180) connected to the KSR030
      * @param channel The number (1-16) of the servo to move
@@ -534,7 +540,7 @@ namespace KSR030 {
 
         i2c_setFreq(50);
 
-        if (kspins.pulseDuration())
+        if (KSRobotCPP.mb_version())
             temp = detect_freq(channel, iopin, 1);
         else
             temp = detect_freq(channel, iopin, 0);
