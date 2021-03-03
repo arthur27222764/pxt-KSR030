@@ -115,12 +115,8 @@ namespace KSR030 {
 
 
         i2c_setFreq(50);
-
-        if (KSRobotCPP.mb_version())
-            ks_version = 1
-        else
-            ks_version = 0
-
+        ks_version = KSRobotCPP.mb_version()
+        
         pwm_frq = detect_freq(ServoNum.S0, DigitalPin.P2, ks_version)
 
         servo_pwm(pwm_frq);
@@ -542,7 +538,7 @@ namespace KSR030 {
         }
 
         i2c_setFreq(50);
- 
+
         temp = detect_freq(channel, iopin, ks_version);
         servo_pwm(pwm_frq);
 
