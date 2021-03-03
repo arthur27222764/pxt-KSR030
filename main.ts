@@ -4,7 +4,10 @@
 
 declare namespace KSRobotCPP {
     //% shim=KSRobotCPP::mb_version
-    function mb_version(): number;
+    function mb_version(): number
+    {
+        return 0;
+    }
 
 }
 
@@ -117,13 +120,9 @@ namespace KSR030 {
         i2c_setFreq(50);
 
         
-        try {
-            ks_version =  KSRobotCPP.mb_version()
-        } catch (error) {
-            ks_version = null; 
-        };
-
         
+
+        ks_version =  KSRobotCPP.mb_version()
         
 
         pwm_frq = detect_freq(ServoNum.S0, DigitalPin.P2, ks_version)
