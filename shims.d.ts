@@ -1,4 +1,4 @@
-declare namespace KSRobotCPP {
+namespace KSRobotCPP {
     // %shim=KSRobotCPP::mb_version
     function mb_version()
     {
