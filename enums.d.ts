@@ -1,0 +1,5 @@
+
+declare namespace KSR030 {
+
+
+}
