@@ -2,16 +2,6 @@
  * KSR030 V0.010
  */
 
-declare namespace KSRobotCPP {
-    
-
-}
-
-//% advanced=true shim=KSRobotCPP::mb_version
-function mb_version(): number {
-    return 0
-}
-
 
 
 //% weight=10 color=#00A6F0 icon="\uf085" block="KSR030"
@@ -123,7 +113,7 @@ namespace KSR030 {
         
         
 
-        ks_version =  KSRobotCPP.mb_version()
+        ks_version =  ksrobotlib.mb_version()
         
 
         pwm_frq = detect_freq(ServoNum.S0, DigitalPin.P2, ks_version)

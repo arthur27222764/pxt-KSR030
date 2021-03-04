@@ -1,19 +1,15 @@
 #include "pxt.h"
-using namespace pxt;
-namespace KSRobotCPP
+
+namespace ksrobotlib
 {
 
     //%
     int mb_version()
     {
-        int v = 0;
-
 #if MICROBIT_CODAL
-        v = 0;
+        return 0;
+#else
+        return 1;
 #endif
-        v = 1;
-
-        return v;
     }
-
 } // namespace KSRobotCPP
