@@ -3,6 +3,8 @@
 using namespace pxt;
 
 //% weight=10 color=#00A6F0 icon="\uf085" 
+namespace KSR030
+{
 
     //%
     int mb_version()
