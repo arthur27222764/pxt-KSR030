@@ -1,7 +1,8 @@
 #include "pxt.h"
 
-namespace KSR030
-{
+using namespace pxt;
+
+//% weight=10 color=#00A6F0 icon="\uf085" 
 
     //%
     int mb_version()

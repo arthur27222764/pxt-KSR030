@@ -113,7 +113,7 @@ namespace KSR030 {
         
         
 
-        ks_version =  KSR030.mb_version()
+        ks_version =  mb_version()
         
 
         pwm_frq = detect_freq(ServoNum.S0, DigitalPin.P2, ks_version)
