@@ -1,7 +1,7 @@
 
-declare namespace KSR030 {
+//% weight=10 color=#00A6F0 icon="\uf085" 
+declare namespace kslib{
  
-    //% shim=KSR030::mb_version
-    function mb_version(): int32;
+   
 
 }

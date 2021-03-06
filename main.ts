@@ -88,6 +88,9 @@ namespace KSR030 {
     let pwm_frq = 69;
     let ks_version = 0;
 
+    //% shim=kslib::mb_version
+    function mb_version(): int32;
+
     function i2c_write(reg: number, value: number) {
 
         let buf = pins.createBuffer(2)

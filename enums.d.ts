@@ -1,5 +1,5 @@
 
-declare namespace KSR030 {
+declare namespace kslib{
 
 
 }

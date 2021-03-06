@@ -3,7 +3,7 @@
 using namespace pxt;
 
 //% weight=10 color=#00A6F0 icon="\uf085" 
-namespace KSR030
+namespace kslib
 {
 
     //%
@@ -15,4 +15,5 @@ namespace KSR030
         return 1;
 #endif
     }
-} // namespace KSR030
+    
+} // namespace kslib
