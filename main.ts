@@ -89,7 +89,9 @@ namespace KSR030 {
     let ks_version = 0;
 
     //% shim=kslib::mb_version
-    function mb_version(): int32;
+    function mb_version(): int32{
+        return 0;
+    }
 
     function i2c_write(reg: number, value: number) {
 
