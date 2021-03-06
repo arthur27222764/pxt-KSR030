@@ -89,7 +89,7 @@ namespace KSR030 {
     let ks_version = 0;
 
     //% shim=kslib::mb_version
-    function mb_version(): int32{
+    function mb_version(): int32 {
         return 0;
     }
 
@@ -114,13 +114,7 @@ namespace KSR030 {
 
 
         i2c_setFreq(50);
-
-        
-        
-
-        ks_version =  mb_version()
-        
-
+        ks_version = mb_version()
         pwm_frq = detect_freq(ServoNum.S0, DigitalPin.P2, ks_version)
 
         servo_pwm(pwm_frq);
