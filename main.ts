@@ -202,13 +202,10 @@ namespace KSR030 {
                 frq = pins.pulseIn(iopin, PulseValue.High, 3000)
 
 
-                if (frq > 1600 || frq == 0) {
+                if (frq > 1580 || frq == 0) {
                     ret_frq = 88 //X
                 } else {
-                    if (frq > 1570) {
-
-                        ret_frq = 53 //5
-                    } else{
+                   
 
                     if (frq > 1540) {
 
@@ -230,16 +227,10 @@ namespace KSR030 {
 
                                         ret_frq = 66 //B
                                     } else {
-                                        if (frq > 1400) {
+                                        if (frq <= 1430) {
 
                                             ret_frq = 65 //A
 
-                                        } else {
-                                            if (frq <= 1400) {
-
-                                                ret_frq = 52 //4
-
-                                            }
                                         }
                                     }
 
