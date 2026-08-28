@@ -135,7 +135,8 @@ namespace KSR030 {
         let ret_frq = 0;
 
 
-        if (version) { // microbit V1
+        //if (version) { // microbit V1
+        if (1) { // microbit V1
             setPwm(channel, 0, SERVOMAX);
             for (let i = 0; i < 2000; i++) {
                 frqPinState = pins.digitalReadPin(iopin)
@@ -249,7 +250,7 @@ namespace KSR030 {
                     }
                 }
                 }
-                if (frq != 0 && frq < 1580)
+                if (frq != 0 && frq < 1600)
                     break
             }
         }
