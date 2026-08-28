@@ -76,7 +76,11 @@ namespace KSR030 {
         //% blockId="Frq_E" block="E"
         E = 69,
         //% blockId="Frq_F" block="F"
-        F = 70
+        F = 70,
+        //% blockId="Frq_4" block="4"
+        _4 = 52,
+        //% blockId="Frq_5" block="5"
+        _5 = 53
 
     }
 
@@ -147,42 +151,42 @@ namespace KSR030 {
                 if (timer > oneSecond) {
                     frq = frq - 2
 
-                    if (frq > 53) {
-
-                        ret_frq = 65 //A
-                    } else {
-                        if (frq > 52) {
-
+                    switch (frq) {
+                        case 56:
+                            ret_frq = 52 // Near the range of 4
+                            break
+                        case 55:
+                            ret_frq = 52 //4
+                            break
+                        case 54:
+                            ret_frq = 65 //A
+                            break
+                        case 53:
                             ret_frq = 66 //B
-                        } else {
-                            if (frq > 51) {
-
-                                ret_frq = 67 //C
-                            } else {
-                                if (frq > 50) {
-
-                                    ret_frq = 68 //D
-                                } else {
-                                    if (frq > 49) {
-
-                                        ret_frq = 69 //E
-                                    } else {
-                                        if (frq > 47) {
-
-                                            ret_frq = 70 //F
-                                        } else {
-                                            if (frq <= 47) {
-
-                                                ret_frq = 88 //X
-
-                                            }
-                                        }
-
-                                    }
-                                }
-                            }
-                        }
+                            break
+                        case 52:
+                            ret_frq = 67 //C
+                            break
+                        case 51:
+                            ret_frq = 68 //D
+                            break
+                        case 50:
+                            ret_frq = 69 //E
+                            break
+                        case 49:
+                            ret_frq = 70 //F
+                            break
+                        case 48:
+                            ret_frq = 53 //5
+                            break
+                        case 47:            
+                            ret_frq = 53 // Near the range of 5 
+                            break
+                        default:
+                            ret_frq = 88 //X
+                            break
                     }
+                   
 
                     frq = 0
                     timer = 0
@@ -198,9 +202,14 @@ namespace KSR030 {
                 frq = pins.pulseIn(iopin, PulseValue.High, 3000)
 
 
-                if (frq > 1580 || frq == 0) {
+                if (frq > 1600 || frq == 0) {
                     ret_frq = 88 //X
                 } else {
+                    if (frq > 1570) {
+
+                        ret_frq = 53 //5
+                    } else{
+
                     if (frq > 1540) {
 
                         ret_frq = 70 //F
@@ -221,10 +230,16 @@ namespace KSR030 {
 
                                         ret_frq = 66 //B
                                     } else {
-                                        if (frq <= 1430) {
+                                        if (frq > 1400) {
 
                                             ret_frq = 65 //A
 
+                                        } else {
+                                            if (frq <= 1400) {
+
+                                                ret_frq = 52 //4
+
+                                            }
                                         }
                                     }
 
@@ -232,6 +247,7 @@ namespace KSR030 {
                             }
                         }
                     }
+                }
                 }
                 if (frq != 0 && frq < 1580)
                     break
@@ -257,7 +273,10 @@ namespace KSR030 {
 
     function servo_pwm(frqval: number): void {
 
-        if (frqval == FrqState.A) {
+        
+        if (frqval == FrqState._4) {
+            i2c_setFreq(50 * 0.90);
+        } else if (frqval == FrqState.A) {
             i2c_setFreq(50 * 0.92);
         } else if (frqval == FrqState.B) {
             i2c_setFreq(50 * 0.94);
@@ -269,7 +288,10 @@ namespace KSR030 {
             i2c_setFreq(50 * 1);
         } else if (frqval == FrqState.F) {
             i2c_setFreq(50 * 1.02);
-        } else {
+        } else if (frqval == FrqState._5) {
+            i2c_setFreq(50 * 1.04);
+        } 
+        else {
             i2c_setFreq(50);
         }
     }
