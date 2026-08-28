@@ -227,18 +227,18 @@ namespace KSR030 {
 
                                         ret_frq = 66 //B
                                     } else {
-                                        if (frq <= 1430) {
+                                        if (frq <= 1430){
 
                                             ret_frq = 65 //A
 
-                                        }
+                                        } 
                                     }
 
                                 }
                             }
                         }
                     }
-                }
+                
                 }
                 if (frq != 0 && frq < 1580)
                     break
