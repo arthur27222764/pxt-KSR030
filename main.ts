@@ -135,7 +135,7 @@ namespace KSR030 {
         let ret_frq = 0;
 
 
-        if (version) {  // microbit V1
+        if (version) { // microbit V1
             setPwm(channel, 0, SERVOMAX);
             for (let i = 0; i < 2000; i++) {
                 frqPinState = pins.digitalReadPin(iopin)
@@ -151,57 +151,42 @@ namespace KSR030 {
                 if (timer > oneSecond) {
                     frq = frq - 2
 
-                    switch (frq) {
-                        /*case 56:
-                            ret_frq = 52 // Near the range of 4
-                            break
-                        case 55:
-                            ret_frq = 52 //4
-                            break*/
-                        case 54:
-                            ret_frq = 65 //A
-                            break
-                        case 53:
+                    if (frq > 53) {
+
+                        ret_frq = 65 //A
+                    } else {
+                        if (frq > 52) {
+
                             ret_frq = 66 //B
-                            break
-                        case 52:
-                            ret_frq = 67 //C
-                            break
-                        case 51:
-                            ret_frq = 68 //D
-                            break
-                        case 50:
-                            ret_frq = 69 //E
-                            break
-                        case 49:
-                            ret_frq = 70 //F
-                            break
-                        /*case 48:
-                            ret_frq = 53 //5
-                            break
-                        case 47:            
-                            ret_frq = 53 // Near the range of 5 
-                            break
-                        default:
-                            ret_frq = 88 //X
-                            break*/
-                    }
-                    if (frq > 54) {
+                        } else {
+                            if (frq > 51) {
 
-                        ret_frq = 52 //4
-                    }else  {
-                        if (frq > 47){
-                        ret_frq = 53 //5
-                        }else {
-                            if (frq <= 47) {
-                                ret_frq = 88 //X
+                                ret_frq = 67 //C
+                            } else {
+                                if (frq > 50) {
 
+                                    ret_frq = 68 //D
+                                } else {
+                                    if (frq > 49) {
+
+                                        ret_frq = 69 //E
+                                    } else {
+                                        if (frq > 47) {
+
+                                            ret_frq = 70 //F
+                                        } else {
+                                            if (frq <= 47) {
+
+                                                ret_frq = 88 //X
+
+                                            }
+                                        }
+
+                                    }
+                                }
                             }
-                            
                         }
-
                     }
-                   
 
                     frq = 0
                     timer = 0
