@@ -135,7 +135,7 @@ namespace KSR030 {
         let ret_frq = 0;
 
 
-        if (version) {
+        if (version) {  // microbit V1
             setPwm(channel, 0, SERVOMAX);
             for (let i = 0; i < 2000; i++) {
                 frqPinState = pins.digitalReadPin(iopin)
@@ -152,12 +152,12 @@ namespace KSR030 {
                     frq = frq - 2
 
                     switch (frq) {
-                        case 56:
+                        /*case 56:
                             ret_frq = 52 // Near the range of 4
                             break
                         case 55:
                             ret_frq = 52 //4
-                            break
+                            break*/
                         case 54:
                             ret_frq = 65 //A
                             break
@@ -176,7 +176,7 @@ namespace KSR030 {
                         case 49:
                             ret_frq = 70 //F
                             break
-                        case 48:
+                        /*case 48:
                             ret_frq = 53 //5
                             break
                         case 47:            
@@ -184,7 +184,22 @@ namespace KSR030 {
                             break
                         default:
                             ret_frq = 88 //X
-                            break
+                            break*/
+                    }
+                    if (frq > 54) {
+
+                        ret_frq = 52 //4
+                    }else  {
+                        if (frq > 47){
+                        ret_frq = 53 //5
+                        }else {
+                            if (frq <= 47) {
+                                ret_frq = 88 //X
+
+                            }
+                            
+                        }
+
                     }
                    
 
@@ -194,7 +209,7 @@ namespace KSR030 {
                 }
             }
         }
-        else {
+        else {  // microbit V2
 
             let pulselen = servo_map(90, 0, 180, SERVOMIN, SERVOMAX);
             setPwm(channel, 0, pulselen);
