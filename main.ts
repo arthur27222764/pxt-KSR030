@@ -80,7 +80,11 @@ namespace KSR030 {
         //% blockId="Frq_4" block="4"
         _4 = 52,
         //% blockId="Frq_5" block="5"
-        _5 = 53
+        _5 = 53,
+        //% blockId="Frq_6" block="6"
+        _6 = 54,
+        //% blockId="Frq_7" block="7"
+        _7 = 55
 
     }
 
@@ -166,7 +170,9 @@ namespace KSR030 {
                         ret_frq = 69 //E
                     } else if (frq > 47) {
                         ret_frq = 70 //F
-                    } else if (frq <= 47) {
+                    } else if (frq > 45) {
+                        ret_frq = 54 //6
+                    } else if (frq <= 45) {
                         ret_frq = 88 //X
                     }
                                       
@@ -339,8 +345,9 @@ namespace KSR030 {
             i2c_setFreq(50 * 1);
         } else if (frqval == FrqState.F) {
             i2c_setFreq(50 * 1.02);
-        } 
-        else {
+        } else if (frqval == FrqState._6) {
+            i2c_setFreq(50 * 1.04);
+        } else {
             i2c_setFreq(50);
         }
     }
