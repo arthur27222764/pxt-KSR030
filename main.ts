@@ -133,10 +133,8 @@ namespace KSR030 {
         let oneSecond = 1000;
         let timer = 0;
         let ret_frq = 0;
-
-
-        //if (version) { // microbit V1
-        if (1) { // microbit V1
+       
+        if (1) { 
             setPwm(channel, 0, SERVOMAX);
             for (let i = 0; i < 2000; i++) {
                 frqPinState = pins.digitalReadPin(iopin)
@@ -152,10 +150,65 @@ namespace KSR030 {
                 if (timer > oneSecond) {
                     frq = frq - 2
 
-                     if (frq > 54) {
-
+                    if (frq > 54) {
                         ret_frq = 52 //4
-                    } else {
+                    } else if (frq > 53) {
+                        ret_frq = 65 //A
+                    } else if (frq > 52) {
+                        ret_frq = 66 //B
+                    } else if (frq > 51) {
+                        ret_frq = 67 //C
+                    } else if (frq > 50) {
+                        ret_frq = 68 //D
+                    } else if (frq > 49) {
+                        ret_frq = 69 //E
+                    } else if (frq > 47) {
+                        ret_frq = 70 //F
+                    } else if (frq <= 47) {
+                        ret_frq = 88 //X
+                    }
+                                      
+                  
+
+                    frq = 0
+                    timer = 0
+                    break;
+                }
+            }
+        }
+ 
+
+        return ret_frq
+
+    }
+
+
+/*
+    function detect_freq(channel: ServoNum, iopin: DigitalPin, version: number): number {
+        let frq = 0;
+        let frqPinState = 0;
+        let prevFrqPinState = 0;
+        let oneSecond = 1000;
+        let timer = 0;
+        let ret_frq = 0;
+
+
+        if (version) {
+            setPwm(channel, 0, SERVOMAX);
+            for (let i = 0; i < 2000; i++) {
+                frqPinState = pins.digitalReadPin(iopin)
+                if (frqPinState == 0) {
+                    prevFrqPinState = 0
+                }
+                if (frqPinState == 1 && prevFrqPinState == 0) {
+                    prevFrqPinState = frqPinState
+                    frq = frq + 1
+                }
+                control.waitMicros(1000)
+                timer = timer + 1
+                if (timer > oneSecond) {
+                    frq = frq - 2
+
                     if (frq > 53) {
 
                         ret_frq = 65 //A
@@ -192,7 +245,6 @@ namespace KSR030 {
                             }
                         }
                     }
-                    }
 
                     frq = 0
                     timer = 0
@@ -200,7 +252,7 @@ namespace KSR030 {
                 }
             }
         }
-        else {  // microbit V2
+        else {
 
             let pulselen = servo_map(90, 0, 180, SERVOMIN, SERVOMAX);
             setPwm(channel, 0, pulselen);
@@ -208,14 +260,9 @@ namespace KSR030 {
                 frq = pins.pulseIn(iopin, PulseValue.High, 3000)
 
 
-                if (frq > 1600 || frq == 0) {
+                if (frq > 1580 || frq == 0) {
                     ret_frq = 88 //X
                 } else {
-                    if (frq > 1570) {
-
-                        ret_frq = 53 //5
-                    } else{
-
                     if (frq > 1540) {
 
                         ret_frq = 70 //F
@@ -236,16 +283,10 @@ namespace KSR030 {
 
                                         ret_frq = 66 //B
                                     } else {
-                                        if (frq > 1400) {
+                                        if (frq <= 1430) {
 
                                             ret_frq = 65 //A
 
-                                        } else {
-                                            if (frq <= 1400) {
-
-                                                ret_frq = 52 //4
-
-                                            }
                                         }
                                     }
 
@@ -254,8 +295,7 @@ namespace KSR030 {
                         }
                     }
                 }
-                }
-                if (frq != 0 && frq < 1600)
+                if (frq != 0 && frq < 1580)
                     break
             }
         }
@@ -266,6 +306,7 @@ namespace KSR030 {
 
     }
 
+*/
 
 
 
@@ -281,6 +322,8 @@ namespace KSR030 {
 
         
         if (frqval == FrqState._4) {
+            i2c_setFreq(50 * 0.88);
+        } else if (frqval == FrqState._5) {
             i2c_setFreq(50 * 0.90);
         } else if (frqval == FrqState.A) {
             i2c_setFreq(50 * 0.92);
@@ -294,8 +337,6 @@ namespace KSR030 {
             i2c_setFreq(50 * 1);
         } else if (frqval == FrqState.F) {
             i2c_setFreq(50 * 1.02);
-        } else if (frqval == FrqState._5) {
-            i2c_setFreq(50 * 1.04);
         } 
         else {
             i2c_setFreq(50);
