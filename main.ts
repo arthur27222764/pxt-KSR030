@@ -150,8 +150,10 @@ namespace KSR030 {
                 if (timer > oneSecond) {
                     frq = frq - 2
 
-                    if (frq > 54) {
+                    if (frq > 55) {
                         ret_frq = 52 //4
+                    } else if (frq > 54) {
+                        ret_frq = 53 //5
                     } else if (frq > 53) {
                         ret_frq = 65 //A
                     } else if (frq > 52) {
