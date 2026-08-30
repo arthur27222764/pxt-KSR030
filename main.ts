@@ -152,7 +152,15 @@ namespace KSR030 {
                 control.waitMicros(1000)
                 timer = timer + 1
                 if (timer > oneSecond) {
-                    frq = frq - 2
+                    
+
+                    if (version) {
+                        frq = frq - 2
+                    }
+                    else
+                    {
+                        frq = frq 
+                    }
 
                     if (frq > 55) {
                         ret_frq = 52 //4
@@ -175,6 +183,7 @@ namespace KSR030 {
                     } else if (frq <= 45) {
                         ret_frq = 88 //X
                     }
+                    
                                       
                   
 
